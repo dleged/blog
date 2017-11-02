@@ -2,19 +2,17 @@
  * Created by $ on 2017/11/1.
  */
 !function($){
-    $('.blog-regester').on('click',function(){
-        var _self = $(this);
+    $('.blog-regester-btn').on('click',function(){
+        var regesterBox = $('.login-regester');
         $.ajax({
             type: 'post',
-            url: '/api/user/register',
-            dataType: 'json',
+            url: './api/user/register',
             data:{
-                username: _self.find('[name=username]').val(),
-                password: _self.find('[name=password]').val(),
-                repassword: _self.find('[name=repassword]').val()
+                username: regesterBox.find('[name="username"]').val(),
+                password: regesterBox.find('[name="password"]').val(),
+                repassword: regesterBox.find('[name="repassword"]').val()
             },
             success:function(){
-
             }
         });
     });

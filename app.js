@@ -5,12 +5,13 @@
 
 var express = require('express');
 var swig = require('swig');//模块引擎
-var mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
 var bodyParser = require('body-parser');
 
+var DB_NAME = 'mongodb://localhost:27017/blog';
 //创建app应用 ==》nodeJs 中的http.createServer();
 var app = express();
-
+var router = express.Router();
 /*
 * 配置模板引擎
 * 定义当前应用所使用的模板引擎
@@ -36,21 +37,21 @@ app.use('/public',express.static(__dirname + '/public'));
 /*
 * 根据不同的功能划分模块
 * */
-//app.use('/admin',require('./routers/admin'));
-app.use('/api',require('./routers/api'));
 app.use('/',require('./routers/main'));
-
+app.use('/api',require('./routers/api'));
+//app.use('/admin',require('./routers/admin'));
 
 //监听http请求
 //用户发送http - url - 解析路由 - 找到匹配规则 -
 // 指定绑定函数，返回对象内容至用户
-mongoose.connect('mongodb://localhost:27018/blog',function(err){
+
+MongoClient.connect(DB_NAME,function(err,db){
     if(err){
         console.info('**********连接mongoose数据失败**********');
     }else{
         console.info('**********连接mongoose数据成功**********');
+        router
         app.listen('5555');
         console.info('**********服务器启动成功**********');
-
     }
 })
