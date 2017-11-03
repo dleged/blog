@@ -8,16 +8,6 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="范端端" />
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
 	<!--<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">-->
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="public/css/animate.css">
@@ -41,15 +31,18 @@
                 <div class="login-regester">
                     <input type="text"
                            name="username"
+                           id="username"
                            placeholder="用户名">
                     <input type="password"
+                           id="password"
                            name="password"
                            placeholder="密码">
                     <input type="password"
-                           name="123"
+                           id="repassword"
+                           name="repassword"
                            placeholder="确认密码">
                    <a
-                           class="blog-regester">注册
+                           class="blog-regester-btn">注册
                    </a>
                 </div>
             </div>
@@ -140,6 +133,7 @@
 	<!-- Main -->
 	<script src="public/js/main.js"></script>
     <script src="public/js/index.js"></script>
+    <script src="public/js/pShine-validator.js"></script>
 	</body>
 </html>
 

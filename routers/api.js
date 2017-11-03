@@ -2,6 +2,7 @@
  * Created by $ on 2017/11/1.
  */
 var express = require('express');
+var UserBase = require('../models/user');
 var router = express.Router();
 
 //返回统一的对象
@@ -28,7 +29,46 @@ router.post('/user/register',function(req,res,next){
     var username = json.username;
     var password = json.password;
     var repassword = json.repassword;
+    // 查找表username值是否唯一
+    UserBase.findOne({ username: username }).then( function(character) {
+        if(character){
+            responseData.message = '用户已存在！';
+            res.json(responseData);
+            return;
+        }
+        var UserModel = new UserBase({username:username,password:password});
+        return UserModel.save();
+    }).then(function(userInfo){
+        if(userInfo){
+            responseData.message = '注册成功！';
+            res.json(responseData);
+        }
+    });
+});
 
+/*用户登陆*/
+router.post('/user/login',function(req,res,next){
+    var json = req.body;
+    var username = json.username;
+    var password = json.password;
+    var repassword = json.repassword;
+    // 查找表username值是否唯一
+    UserBase.findOne({ username: username }).then( function(character) {
+        if(!character){
+            responseData.message = '用户不存在！';
+            res.json(responseData);
+            return;
+        }
+        console.log(character);
+        if(character.password === password){
+            responseData.message = '登陆成功！';
+            res.json(responseData);
+        }else{
+            responseData.message = '密码错误！';
+            res.json(responseData);
+        }
+
+    });
 })
 
 module.exports = router;
