@@ -5,7 +5,7 @@
 
 var express = require('express');
 var swig = require('swig');//模块引擎
-var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 var DB_NAME = 'mongodb://localhost:27017/blog';
@@ -38,19 +38,18 @@ app.use('/public',express.static(__dirname + '/public'));
 * 根据不同的功能划分模块
 * */
 app.use('/',require('./routers/main'));
-app.use('/api',require('./routers/api'));
+app.use('/api',require('./routers/api'));//后台接口路由
 //app.use('/admin',require('./routers/admin'));
 
 //监听http请求
 //用户发送http - url - 解析路由 - 找到匹配规则 -
 // 指定绑定函数，返回对象内容至用户
 
-MongoClient.connect(DB_NAME,function(err,db){
+mongoose.connect(DB_NAME,function(err){
     if(err){
         console.info('**********连接mongoose数据失败**********');
     }else{
         console.info('**********连接mongoose数据成功**********');
-        router
         app.listen('5555');
         console.info('**********服务器启动成功**********');
     }

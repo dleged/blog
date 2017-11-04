@@ -3,43 +3,56 @@
  */
 !function($,doc){
     'user staic'
-    var userLogin = './api/user/login';
+    var userLogin = './api/user/';
     var BLOG = BLOG || {};
-    BLOG.eventCache = [];
-    BLOG.register = {
+    var _ = BLOG;
+    _.register = {
         event : function(ele,type,fn){
             $(doc).on(type,ele,fn);
         }
     }
 
-    BLOG.eventsMap = [
+    _.eventsMap = [
         {
-            info: '注册',
-            stackClass: '.blog-regester-btn',
+            info: '注册或者登陆模块',
+            stackClass: '.blog-register-btn',
             type: 'click',
-            onFn: doRegisterPost
+            onFn: loginAndRes
+        },
+        {
+            info: '注册和登陆切换',
+            stackClass: '.forget-reg .reg',
+            type: 'click',
+            onFn: toggleLoginAndRes
         }
     ]
 
     /*注册句柄事件*/
-    function doRegisterPost(){
-        var regesterBox = $('.login-regester');
-        var tipText = registerFn.Verifica();
+    function loginAndRes(){
+        var status = $(this).attr('blog-status');
+        loginAndResFns.status = status;
+        var tipText = loginAndResFns.Verifica();
         if(tipText){
-            registerFn.tipFn(tipText);
+            loginAndResFns.tipFn(tipText);
             return ;
         }else{
-            var data = {
-                username: regesterBox.find('#username').val(),
-                password: regesterBox.find('#password').val(),
-                repassword: regesterBox.find('#repassword').val()
-            }
-            registerFn.doPost(data,userLogin);
+            var data = loginAndResFns.getFrom();
+            loginAndResFns.doPost(data,userLogin + status);
         }
     }
 
     /*注册和登陆方法*/
-    var registerFn = {
+    var loginAndResFns = {
+        status: 'login',
+        regesterBox: $('.login-regester'),
+        dataDom:{
+            username: '#username',
+            password: '#password',
+            repassword: '#repassword',
+            tips: '.box-input-tips',
+            btn: '.blog-register-btn',
+            reg: '.forget-reg .reg'
+        },
         Verifica: function(){
             var validator = new Validator();
             validator.addRule('username',[{
@@ -50,14 +63,31 @@
                 strategy: 'isEmpty',
                 errorMsg: '密码名不能为空'
             }]);
-            validator.addRule('password repassword',[{//需要传2个dom
-                strategy: 'isSame',
-                errorMsg: '两次输入密码不相同'
-            }]);
+            if(loginAndResFns.status === 'resgister'){
+                validator.addRule('password repassword',[{//需要传2个dom
+                    strategy: 'isSame',
+                    errorMsg: '两次输入密码不相同'
+                }]);
+            }
             return validator.start();
         },
+        getFrom: function(){
+            var doms = loginAndResFns.dataDom;
+            var data = {
+                username: $(doms.username).val(),
+                password: $(doms.password).val()
+            }
+            if(loginAndResFns.status === 'resgister'){
+                data.repassword = $(doms.repassword).val();
+            }
+            return data;
+        },
         tipFn: function(text){
-            console.log(text);
+            var tip = $(loginAndResFns.dataDom.tips);
+            tip.text(text);
+            setTimeout(function(){
+                tip.text('');
+            },2000)
         },
         doPost: function(data,url){
             $.ajax({
@@ -66,15 +96,55 @@
                 data: data,
                 dataType: 'json',
                 success: function(data){
-                    registerFn.tipFn(data.message);
+                    var code = data.code;
+                    if(code){
+                        loginAndResFns.doSuccess();
+                    }
+                    loginAndResFns.tipFn(data.message);
                 }
             });
+        },
+        doSuccess: function(){
+            if(loginAndResFns.status === 'login'){
+                /*...*/
+            }else if(loginAndResFns.status === 'register'){
+                this.toggleFn();
+            }
+        },
+        toggleFn: function(){
+            var btn = $(loginAndResFns.dataDom.btn);
+            var reg = $(loginAndResFns.dataDom.reg);
+            var repassword = $(loginAndResFns.dataDom.repassword);
+            repassword.toggle();
+            if(this.status === 'register'){
+                this.status = 'login';
+                btn.attr('blog-status','login').text('登陆');
+                reg.text('立即注册');
+            }else{
+                this.status = 'login';
+                btn.attr('blog-status','register').text('注册');
+                this.status = 'register';
+                reg.text('立即登陆');
+            }
         }
     }
 
+    function toggleLoginAndRes(){
+        loginAndResFns.toggleFn();
+    }
+
+
+    Function.prototype.after = function(fn){
+        var self = this;
+        return function(){
+            self.apply(self);
+            var result = fn.apply(this,arguments);
+            return result;
+        }
+    }
 
     var registerEvent =  BLOG.register.event;
-    BLOG.eventsMap.forEach(function(item){
+    _.eventsMap.forEach(function(item){
         registerEvent(item.stackClass,item.type,item.onFn);
     });
 
