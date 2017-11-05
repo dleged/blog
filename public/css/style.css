@@ -2,7 +2,11 @@
 *{box-sizing: border-box;}
 body {
     line-height: 1.5;
-    font-family: 'Microsoft Yahei'
+    font-family: 'Microsoft Yahei';
+    background: #ebebeb;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 ol,ul {
     list-style: none
@@ -54,7 +58,13 @@ button{
     height: 80px;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    width: 100%;
     min-width: 1000px;
+    float: left;
+    overflow: hidden;
+}
+.headerv-nav{
+    float: left;
 }
 .headerV .headerv-nav a{
     float: left;
@@ -76,6 +86,19 @@ button{
     color: #6ed56c;
     font-size: 16px;
     line-height: 50px;
+}
+.headerV .headerv-user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.headerV .headerv-logout {
+    float: right;
+    margin: 5px 0 0 20px;
+    width: 40px;
+    height: 40px;
+    background: url(../images/lagout.png) 50% 50% no-repeat;
+    cursor: pointer;
 }
 /*模态窗*/
 .modal-v{
@@ -102,6 +125,7 @@ button{
 .modal-t{
     height: 60px;
     line-height: 60px;
+    min-width: 200px;
 }
 .modal-c{
     padding: 20px 30px;

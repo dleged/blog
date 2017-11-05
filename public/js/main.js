@@ -86,9 +86,7 @@
 			} else {
 				$('.js-top').removeClass('active');
 			}
-
 		});
-	
 	};
 
 

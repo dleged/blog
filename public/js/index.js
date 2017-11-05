@@ -1,8 +1,8 @@
 /**
  * Created by $ on 2017/11/1.
  */
-!function($,doc){
-    'user staic'
+!function($,doc,global){
+    'user strict'
     var userLogin = './api/user/';
     var BLOG = BLOG || {};
     var _ = BLOG;
@@ -51,7 +51,8 @@
             repassword: '#repassword',
             tips: '.box-input-tips',
             btn: '.blog-register-btn',
-            reg: '.forget-reg .reg'
+            reg: '.forget-reg .reg',
+            headervUser: '.headerv-user'
         },
         Verifica: function(){
             var validator = new Validator();
@@ -98,18 +99,23 @@
                 success: function(data){
                     var code = data.code;
                     if(code){
-                        loginAndResFns.doSuccess();
+                        loginAndResFns.doSuccess(data.username);
                     }
                     loginAndResFns.tipFn(data.message);
                 }
             });
         },
-        doSuccess: function(){
+        doSuccess: function(name){
             if(loginAndResFns.status === 'login'){
-                /*...*/
+                this.loginSuccess(name);
             }else if(loginAndResFns.status === 'register'){
                 this.toggleFn();
             }
+        },
+        loginSuccess: function(){
+            var userBox = $(loginAndResFns.dataDom.headervUser);
+            userBox.html('<a href=""' + ' class="router-link-active">' + name + '</a>'
+                        +'<a href="/api/user/logout" class="headerv-logout"></a>');
         },
         toggleFn: function(){
             var btn = $(loginAndResFns.dataDom.btn);
@@ -144,8 +150,10 @@
     }
 
     var registerEvent =  BLOG.register.event;
+
     _.eventsMap.forEach(function(item){
         registerEvent(item.stackClass,item.type,item.onFn);
     });
 
-}(jQuery,document)
+    global.BLOG = BLOG;
+}(jQuery,document,window)

@@ -40,6 +40,7 @@ router.post('/user/register',function(req,res,next){
         return UserModel.save();
     }).then(function(userInfo){
         if(userInfo){
+            responseData.code = 1;
             responseData.message = '注册成功！';
             res.json(responseData);
         }
@@ -55,15 +56,23 @@ router.post('/user/login',function(req,res,next){
     // 查找表username值是否唯一
     UserBase.findOne({ username: username }).then( function(character) {
         if(!character){
+            responseData.code = 0;
             responseData.message = '用户不存在！';
             res.json(responseData);
             return;
         }
         console.log(character);
         if(character.password === password){
+            responseData.code = 1;
             responseData.message = '登陆成功！';
+            responseData.info = {
+                id: character._id,
+                username: character.username
+            }
+            req.cookies.set('userInfo',JSON.stringify(responseData.info));
             res.json(responseData);
         }else{
+            responseData.code = 0;
             responseData.message = '密码错误！';
             res.json(responseData);
         }
