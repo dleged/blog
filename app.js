@@ -7,6 +7,7 @@ var express = require('express');
 var swig = require('swig');//模块引擎
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var Cookies = require('cookies');
 
 var DB_NAME = 'mongodb://localhost:27017/blog';
 //创建app应用 ==》nodeJs 中的http.createServer();
@@ -33,7 +34,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 * 设置静态文件托管
 * */
 app.use('/public',express.static(__dirname + '/public'));
-
+/*设置cookies*/
+app.use(function(req,res,next){
+    req.cookies = new Cookies(req,res);
+    req.userInfo = {};
+    if(req.cookies.get('userInfo')){
+        try{
+            req.userInfo = JSON.stringify(req.cookies.get('userInfo'));
+        }catch(e) {}
+    }
+    next();
+});
 /*
 * 根据不同的功能划分模块
 * */
