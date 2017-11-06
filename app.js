@@ -8,11 +8,10 @@ var swig = require('swig');//模块引擎
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var Cookies = require('cookies');
-
+var User = require('./models/user');
 var DB_NAME = 'mongodb://localhost:27017/blog';
 //创建app应用 ==》nodeJs 中的http.createServer();
 var app = express();
-var router = express.Router();
 /*
 * 配置模板引擎
 * 定义当前应用所使用的模板引擎
@@ -37,11 +36,15 @@ app.use('/public',express.static(__dirname + '/public'));
 /*设置cookies*/
 app.use(function(req,res,next){
     req.cookies = new Cookies(req,res);
+    //解析cookies用户信息
     req.userInfo = {};
-    if(req.cookies.get('userInfo')){
-        try{
-            req.userInfo = JSON.stringify(req.cookies.get('userInfo'));
-        }catch(e) {}
+    try{
+        req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+        /!*判断是否是管理员*!/
+        User.findById(req.userInfo.id).then(function(user){
+            req.userInfo.isAdmin = Boolean(user.isAdmin);
+        })
+    }catch(e) {
     }
     next();
 });
@@ -64,4 +67,4 @@ mongoose.connect(DB_NAME,function(err){
         app.listen('5555');
         console.info('**********服务器启动成功**********');
     }
-})
+});
