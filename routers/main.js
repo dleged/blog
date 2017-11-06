@@ -6,9 +6,8 @@ var router = express.Router();
 
 router.get('/',function(req,res,next){
     res.render('main/index',{
-        userInfo: JSON.parse(req.userInfo)
+        userInfo: req.userInfo
     });
-    console.log(11111,JSON.parse(req.userInfo));
 })
 
 module.exports = router;

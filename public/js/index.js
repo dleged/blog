@@ -20,14 +20,43 @@
             onFn: loginAndRes
         },
         {
+            info: '登陆按钮',
+            stackClass: '.headerv-login',
+            type: 'click',
+            onFn: showLogin
+        },
+        {
             info: '注册和登陆切换',
             stackClass: '.forget-reg .reg',
             type: 'click',
             onFn: toggleLoginAndRes
+        },
+        {
+            info: '退出登陆',
+            stackClass: '.headerv-logout',
+            type: 'click',
+            onFn: logout
         }
     ]
 
     /*注册句柄事件*/
+    function showLogin(){
+        var temp = getTemplate('logAndReg');//获取登陆和注册字符串模板
+        var modalv = new ModalV('登录或注册',temp);
+    }
+    function logout(){
+        console.log(userLogin + 'logout');
+        $.ajax({
+            type: 'get',
+            url: userLogin + 'logout',
+            success: function(data){
+                if(data.message){
+                    location.reload();
+                }
+            }
+        })
+    }
+
     function loginAndRes(){
         var status = $(this).attr('blog-status');
         loginAndResFns.status = status;
@@ -114,8 +143,9 @@
         },
         loginSuccess: function(){
             var userBox = $(loginAndResFns.dataDom.headervUser);
-            userBox.html('<a href=""' + ' class="router-link-active">' + name + '</a>'
-                        +'<a href="/api/user/logout" class="headerv-logout"></a>');
+            location.reload();//登陆成功后，刷新页面，session控制登陆
+            /*userBox.html('<a href=""' + ' class="router-link-active">' + name + '</a>'
+                        +'<a href="/api/user/logout" class="headerv-logout"></a>');*/
         },
         toggleFn: function(){
             var btn = $(loginAndResFns.dataDom.btn);
@@ -134,11 +164,9 @@
             }
         }
     }
-
     function toggleLoginAndRes(){
         loginAndResFns.toggleFn();
     }
-
 
     Function.prototype.after = function(fn){
         var self = this;

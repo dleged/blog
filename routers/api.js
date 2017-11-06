@@ -52,7 +52,6 @@ router.post('/user/login',function(req,res,next){
     var json = req.body;
     var username = json.username;
     var password = json.password;
-    var repassword = json.repassword;
     // 查找表username值是否唯一
     UserBase.findOne({ username: username }).then( function(character) {
         if(!character){
@@ -61,12 +60,11 @@ router.post('/user/login',function(req,res,next){
             res.json(responseData);
             return;
         }
-        console.log(character);
         if(character.password === password){
             responseData.code = 1;
             responseData.message = '登陆成功！';
             responseData.info = {
-                id: character._id,
+                id: character.id,
                 username: character.username
             }
             req.cookies.set('userInfo',JSON.stringify(responseData.info));
@@ -78,6 +76,14 @@ router.post('/user/login',function(req,res,next){
         }
 
     });
+})
+
+/*用户退出*/
+router.get('/user/logout',function(req,res,next){
+    req.cookies.set('userInfo',null);
+    responseData.code = 1;
+    responseData.message = '退出成功！';
+    res.json(responseData);
 })
 
 module.exports = router;

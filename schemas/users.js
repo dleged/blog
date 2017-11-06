@@ -6,6 +6,10 @@ var Schema = require('mongoose').Schema;
 /*建立表结构*/
 var user = new Schema({
     username: String,
-    password: String
+    password: String,
+    isAdmin: {//是否是管理员
+        type: Boolean,
+        default: false
+    }
 })
 module.exports = user;

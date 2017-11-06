@@ -20,52 +20,26 @@
                     <a href="#/channel/" class="">关于我</a>
                 </div>
                 <div class="headerv-user">
-                    {%if userInfo %}
-                    <a href="" class="router-link-active">{{userInfo.username}}</a>
-                    <a href="/api/user/logout" class="headerv-logout"></a>
+                    {%if userInfo.username %}
+                    <a class="router-link-active">
+                        {%if userInfo.isAdmin %}
+                            管理员,
+                        {%else%}
+                            hello,
+                        {%endif%}
+                        {{ userInfo.username  }}
+                    </a>
+                    <a class="headerv-logout"></a>
                     {%else%}
                     <a class="headerv-login">登录</a>
                     {%endif%}
                 </div>
             </heard>
-            <div class="modal-v">
-                <div class="modal-t">
-                    <h2>请先登录或者注册</h2>
-                    <i class="close"></i>
-                </div>
-                <div class="modal-c">
-                    <div class="box-input-tips" style=""></div>
-                    <div class="login-register">
-                        <input type="text"
-                               id="username" autocomplete="off" name="username" placeholder="用户名">
-                        <input type="password"
-                               id="password" autocomplete="off" name="password" placeholder="密码">
-                        <input type="password"
-                               class="hide"
-                               autocomplete="off"
-                               id="repassword" name="repassword" placeholder="确认密码">
-                        <button type="submit" blog-status="login" class="blog-register-btn">登录</button>
-                        <div class="other">
-                            <div class="other-login">其他登录方式：
-                                <a title="使用微博帐号登录" href="/index/open-login?platform=sina"  target="_blank"class="weibo-btn">微博登录</a>
-                                <a title="使用微信帐号登录" href="/index/open-login?platform=wechat" target="_blank" class="weixin-btn">微信登录</a></div>
-                            <div class="forget-reg">
-                                <a href="" target="" class="forget-password">忘记密码？</a>
-                                <a href="#register"
-                                   target="" class="reg">立即注册</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-b">
-                    <button>我知道了</button>
-                    <button>我知道了</button>
-                </div>
-            </div>
         </div>
 	<!-- jQuery -->
 	<script src="public/js/jquery.min.js"></script>
 	<!-- Main -->
+    <script src="public/js/template.base.js"></script>
     <script src="public/js/index.js"></script>
     <script src="public/js/pShine-validator.js"></script>
     <script src="public/js/modalV.js"></script>

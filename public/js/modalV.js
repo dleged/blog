@@ -3,7 +3,6 @@
  */
 !function($,doc,global){
     'use strict'
-
     var modalTagArr =
      [
             {
@@ -38,12 +37,14 @@
 
     /*modalV节点实例缓存池*/
     ModalV.modalCaches = [];
+    ModalV.instance = {};
     ModalV.prototype.renderModals = function(modalTagArr){
             if(!ModalV.modalCaches[0]){
                 var modalv = ModalV.renderModal(modalTagArr);
                 ModalV.modalCaches.push(modalv);
             }else{
-                var modalv = ModalV.modalCaches.unshift();
+                var modalv = ModalV.modalCaches.shift();
+                $('body').append(modalv);
             }
             return modalv;
     }
@@ -55,20 +56,25 @@
         modalv.find('.close').one('click',function(){
             this.close();
         }.bind(this));
+        modalv.one('click',function(event){
+            var target = event.target.className || event.srcElement.className;
+            if(target.toLocaleLowerCase() === 'modal-overlay'){
+                this.close();
+            }
+        }.bind(this));
         return modalv;
     }
 
     ModalV.prototype.renderData = function(){
         var modalv = this.modalv;
         modalv.find('h2').html(this.title);
-        modalv.find('modal-c').html(this.content);
-        modalv.find('modal-b').html(this.buttons);
+        modalv.find('.modal-c').html(this.content);
+        modalv.find('.modal-b').html(this.buttons);
     }
 
     ModalV.prototype.close = function(){
         this.destroy();
     }
-
     ModalV.prototype.destroy = function(){
         var modalv = this.modalv;
         modalv.find('h2').html('');
@@ -77,8 +83,6 @@
         modalv.remove();
         ModalV.modalCaches.push(modalv);
     }
-
-
     ModalV.createElement = function(obj){
         var ele = obj['tag'] && doc.createElement(obj['tag']);
         if(obj['staticClass']){
@@ -97,10 +101,11 @@
     }
     /*创建弹窗*/
     ModalV.renderModal = function(obj){
-        var modalv = $('<div class="modal-v"></div>');
-        this.renderChildren(modalv,obj);
+        var modalv = $('<div class="modal-overlay"><div class="modal-v"></div></div>');
+        this.renderChildren(modalv.find('.modal-v'),obj);
         $('body').append(modalv);
         return modalv;
     }
 
+    global.ModalV = ModalV;
 }(jQuery,document,window)
