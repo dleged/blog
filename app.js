@@ -24,7 +24,8 @@ app.set('views','./views');
 app.set('view engine','html');
 //设置swig页面不缓存
 swig.setDefaults({
-    cache: false
+    cache: false,
+    tzOffset: false
 })
 
 /*bodyParse设置*/
@@ -53,7 +54,7 @@ app.use(function(req,res,next){
 * */
 app.use('/',require('./routers/main'));
 app.use('/api',require('./routers/api'));//后台接口路由
-//app.use('/admin',require('./routers/admin'));
+app.use('/admin',require('./routers/admin'));
 
 //监听http请求
 //用户发送http - url - 解析路由 - 找到匹配规则 -

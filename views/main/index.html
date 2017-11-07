@@ -9,7 +9,8 @@
 	<meta name="keywords" content="" />
 	<meta name="author" content="范端端" />
 	<!--<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">-->
-	<link rel="stylesheet" href="public/css/style.css">
+	<link rel="stylesheet"
+          href="public/css/blog.css">
 	</head>
 	<body>
         <div class="main-bolg">
@@ -22,11 +23,11 @@
                 <div class="headerv-user">
                     {%if userInfo.username %}
                     <a class="router-link-active">
-                        {%if userInfo.isAdmin %}
+                        {% if userInfo.isAdmin %}
                             管理员,
-                        {%else%}
+                        {% else %}
                             hello,
-                        {%endif%}
+                        {% endif %}
                         {{ userInfo.username  }}
                     </a>
                     <a class="headerv-logout"></a>
