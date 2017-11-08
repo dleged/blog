@@ -1,0 +1,41 @@
+{% extends './template/layout.html' %}
+    {% block main %}
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-heading col-md-12">用户列表</div>
+                <div class="panel-body">
+                    <table class="table no-margin col-md-12">
+                        <thead>
+                            <tr>
+                                <th>类型</th><th>标签</th><th>添加者</th><th>创建日期</th><th>修改日期</th><th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in responseData.data %}
+                                <tr>
+                                    <td>{{ category.type }}</td>
+                                    <td>{{ category.mark }}</td>
+                                    <td>{{ category.author }}</td>
+                                    <td>{{ category.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
+                                    <td>{{ category.updateTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
+                                    <td>
+                                        <a href="/admin/category/editor?type={{ category.type }}"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fa fa fa-pencil-square-o mg-l-xs"></i>
+                                            编辑
+                                        </a>
+                                        <a href="/admin/category/delete?type={{ category.type }}"
+                                           class="btn btn-default btn-sm">
+                                            <i class="fa fa-times mg-l-xs"></i>
+                                            删除
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include './template/page.html' %}
+                </div>
+            </section>
+        </div>
+    {% endblock %}

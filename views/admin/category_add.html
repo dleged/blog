@@ -7,7 +7,7 @@
         <section class="panel col-md-12">
             <div class="panel-heading">添加分类</div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="post">
+                <form class="form-horizontal" action="./add" role="category" method="post">
                         {% if !responseData.code %}
                             <div class="error-msg col-md-10 form-group">
                                 {{ responseData.message }}
@@ -31,7 +31,7 @@
                                 <option>css</option>
                                 <option>javascript</option>
                                 <option>react</option>
-                                <option>vue/option>
+                                <option>vue</option>
                             </select>
                         </div>
                     </div>
