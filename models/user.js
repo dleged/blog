@@ -5,4 +5,5 @@
 var mongoose = require('mongoose');
 var UserBase = require('../schemas/users');
 
-module.exports = mongoose.model('user',UserBase);
+/*创建名为users的表*/
+module.exports = mongoose.model('users',UserBase);

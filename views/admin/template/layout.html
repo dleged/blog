@@ -16,12 +16,10 @@
     <link rel="stylesheet" href="/public/admin/css/animate.min.css">
     <link rel="stylesheet" href="/public/admin/css/panel.css">
     <link rel="stylesheet" href="/public/admin/css/skins/palette.1.css" id="skin">
-    <link rel="stylesheet" href="/public/admin/css/fonts/style.1.css" id="font">
     <link rel="stylesheet" href="/public/admin/css/main.css">
-    <!--[if lt IE 9]>
-    <script src="/public/admin/js/html5shiv.js"></script>
-    <script src="/public/admin/js/respond.min.js"></script>
-    <![endif]-->
+    <!--加载当前页面加载的javascript-->
+    {% block stylesheet %}
+    {% endblock %}
 <body>
 <div class="app" data-sidebar="locked">
     <!--导航栏-->
@@ -87,5 +85,15 @@
         <!--end of main-content-->
     </section>
 </div>
+<!--[if lt IE 9]>
+<script src="/public/admin/js/html5shiv.js"></script>
+<script src="/public/admin/js/respond.min.js"></script>
+<![endif]-->
+<script src="/public/admin/vendor/jquery-1.11.1.min.js"></script>
+<script src="/public/admin/vendor/jquery.blockUI.js"></script>
+<script src="/public/admin/vendor/bootstrap.js"></script>
+<!--加载当前页面加载的javascript-->
+{% block script %}
+{% endblock %}
 </body>
 </html>

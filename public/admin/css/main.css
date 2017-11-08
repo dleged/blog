@@ -569,9 +569,10 @@ aside footer .toggle-sidebar i {
 }
 .main-content {
     background: #ebeef1;
+    padding: 15px;
 }
 .main-content .content-wrap {
-    padding: 15px 0;
+    padding: 15px;
 }
 .main-content .subscription {
     padding: 50px 15px;
@@ -3137,7 +3138,7 @@ html.signup body {
 .external-event {
     border: transparent;
     /* default BORDER color */
-    
+
     cursor: default;
     text-align: center;
     font-weight: 400;

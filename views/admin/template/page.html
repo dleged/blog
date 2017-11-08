@@ -1,13 +1,13 @@
 <div class="text-center col-md-12">
     <ul class="pager">
         <li>
-            <a href="/admin/user?page={{blogData.page-1}}"><i class="fa fa-arrow-left"></i></a>
+            <a href="/admin/user?page={{responseData.page-1}}"><i class="fa fa-arrow-left"></i></a>
         </li>
         <li>
-            当前第 {{blogData.page}} 页，共 {{blogData.pages}} 页，共 {{blogData.count}} 条数据
+            当前第 {{responseData.page}} 页，共 {{responseData.pages}} 页，共 {{responseData.count}} 条数据
         </li>
         <li>
-            <a href="/admin/user?page={{blogData.page+1}}"><i class="fa fa-arrow-right"></i></a>
+            <a href="/admin/user?page={{responseData.page+1}}"><i class="fa fa-arrow-right"></i></a>
         </li>
     </ul>
 </div>

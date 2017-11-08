@@ -4,6 +4,17 @@
 var express = require('express');
 var router = express.Router();
 var UserBase = require('../models/user');
+var CategoryBase = require('../models/category');
+
+//返回统一的对象
+var responseData;
+router.use(function(req,res,next){
+    responseData = {
+        code: 0,
+        message: ''
+    }
+    next();
+});
 
 /*管理后台首页*/
 router.get('/',function(req,res,next){
@@ -28,7 +39,7 @@ router.get('/user',function(req,res,next){
         UserBase.find().limit(limit).skip(skip).then(function(users){
             res.render('admin/user_index',{
                 userInfo: req.userInfo,
-                blogData: {
+                responseData: {
                     code: 1,
                     message: '用户查询成功！',
                     data: users,
@@ -44,12 +55,50 @@ router.get('/user',function(req,res,next){
 })
 
 
-/*博客分类*/
+/*博客分类添页面*/
 router.get('/category',function(req,res,next){
-    res.render('admin/category_index',{
-        userInfo: req.userInfo
+    responseData.code = 1;
+    res.render('admin/category',{
+        userInfo: req.userInfo,
+        responseData: responseData
     });
 })
 
+/*博客分类保存*/
+router.post('/category',function(req,res,next){
+    var type = req.body.type;
+    var mark = req.body.mark;
+    if(!type || !mark){
+        responseData.code = 0;
+        responseData.message = '分类信息不能为空!';
+        return res.render('admin/category',{
+            userInfo: req.userInfo,
+            responseData: responseData
+        });
+    }else{
+        /*分类是否存在*/
+        CategoryBase.findOne({type: type}).then(function(category){
+            if(category){
+                responseData.code = 0;
+                responseData.message = '该分类已经存在!';
+            }else{
+                responseData.code = 1;
+                responseData.message = '新增分类成功!';
+                var category = new CategoryBase({
+                    type: type,
+                    mark: mark
+                });
+                category.save();
+            }
+            res.render('admin/category',{
+                userInfo: req.userInfo,
+                responseData: responseData
+            });
+        });
+    }
+
+
+
+});
 module.exports = router;
 

@@ -36,8 +36,8 @@ router.post('/user/register',function(req,res,next){
             res.json(responseData);
             return;
         }
-        var UserModel = new UserBase({username:username,password:password});
-        return UserModel.save();
+        var user = new UserBase({username:username,password:password});
+        return user.save();
     }).then(function(userInfo){
         if(userInfo){
             responseData.code = 1;
