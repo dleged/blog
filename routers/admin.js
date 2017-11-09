@@ -65,12 +65,11 @@ router.get('/category/add',function(req,res,next){
     });
 })
 
-/*博客分类保存*/
+/*博客分类添加*/
 router.post('/category/add',function(req,res,next){
     var type = req.body.type;
     var mark = req.body.mark;
     var author = req.userInfo.username;
-    console.log(author)
     if(!type || !mark){
         responseData.code = 0;
         responseData.message = '分类信息不能为空!';
@@ -102,7 +101,7 @@ router.post('/category/add',function(req,res,next){
     }
 });
 
-/*博客类型列表*/
+/*博客类型列表查询*/
 router.get('/category',function(req,res,next){
     /*从用户数据库中读取用户数据*/
     var limit = 5; //读取的条数
@@ -114,13 +113,13 @@ router.get('/category',function(req,res,next){
         page = Math.min(page,pages); //page不能超过总页数
         page = Math.max(page,1);     //page不能小于第1页
         skip = (page - 1) * limit;
-        CategoryBase.find().limit(limit).skip(skip).then(function(users){
+        CategoryBase.find().limit(limit).skip(skip).then(function(categorys){
             res.render('admin/category_list',{
                 userInfo: req.userInfo,
                 responseData: {
                     code: 1,
-                    message: '用户查询成功！',
-                    data: users,
+                    message: '列表查询成功！',
+                    data: categorys,
                     /*分页组件参数*/
                     count: count,
                     pages: pages,
@@ -135,21 +134,56 @@ router.get('/category',function(req,res,next){
 
 /*博客类型删除*/
 router.get('/category/delete',function(req,res,next){
-    var type = req.query.type;
-    console.log(type);
-    CategoryBase.remove({type:type}).then(function(err){
-        if(!err){
-            res.render('admin/category_list',{
-                responseData: {
-                    code: 1,
-                    message: '删除成功！'
-                }
-            })
-
-        }
-    });
+    var _id = req.query.id;
+    console.log(req.query);
+    CategoryBase.remove({id:_id}, function(err){
+            if(!err){
+                res.render('admin/category_list',{
+                    responseData: {
+                        code: 1,
+                        message: '删除成功！'
+                    }
+                })
+            }
+        });
 })
 
+/*博客类型编辑*/
+router.get('/category/editor',function(req,res,next){
+    var id = req.body.id;
+    CategoryBase.findOne({id: id}).then(function(category){
+
+    })
+    if(!type || !mark){
+        responseData.code = 0;
+        responseData.message = '分类信息不能为空!';
+        return res.render('admin/category_add',{
+            userInfo: req.userInfo,
+            responseData: responseData
+        });
+    }else{
+        /*分类是否存在*/
+       CategoryBase.findOne({id: id}).then(function(category){
+            if(category){
+                responseData.code = 0;
+                responseData.message = '该分类已经存在!';
+            }else{
+                responseData.code = 1;
+                responseData.message = '新增分类成功!';
+                var category = new CategoryBase({
+                    type: type,
+                    mark: mark,
+                    author: author
+                });
+                category.save();
+            }
+            res.render('admin/category_add',{
+                userInfo: req.userInfo,
+                responseData: responseData
+            });
+        });
+    }
+})
 
 
 module.exports = router;

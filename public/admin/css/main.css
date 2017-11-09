@@ -748,7 +748,6 @@ aside footer .toggle-sidebar i {
     text-align: center;
 }
 .modal-content {
-    border-radius: 4px;
     box-shadow: none;
 }
 .well {
@@ -4896,5 +4895,11 @@ canvas {
 .form-horizontal.bordered-group .form-group:last-child {
     border-bottom: 1px solid transparent;
     padding: 0;
+}
+.teal {
+    background-color: #009688 !important;
+}
+.teal.lighten-4 {
+    background-color: #b2dfdb !important;
 }
 /*# sourceMappingURL=main.css.map */
