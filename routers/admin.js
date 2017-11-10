@@ -55,7 +55,6 @@ router.get('/user',function(req,res,next){
     })
 })
 
-
 /*博客分类添页面*/
 router.get('/category/add',function(req,res,next){
     responseData.code = 1;
@@ -93,7 +92,7 @@ router.post('/category/add',function(req,res,next){
                 });
                 category.save();
             }
-            res.render('admin/category_add',{
+            res.render('/admin/category_add',{
                 userInfo: req.userInfo,
                 responseData: responseData
             });
@@ -113,7 +112,10 @@ router.get('/category',function(req,res,next){
         page = Math.min(page,pages); //page不能超过总页数
         page = Math.max(page,1);     //page不能小于第1页
         skip = (page - 1) * limit;
-        CategoryBase.find().limit(limit).skip(skip).then(function(categorys){
+        /*
+        * sort()：按照字段排序，1顺序，-1倒序
+        * */
+        CategoryBase.find().sort({_id: -1}).limit(limit).skip(skip).then(function(categorys){
             res.render('admin/category_list',{
                 userInfo: req.userInfo,
                 responseData: {
@@ -149,42 +151,71 @@ router.get('/category/delete',function(req,res,next){
 })
 
 /*博客类型编辑*/
-router.get('/category/editor',function(req,res,next){
-    var id = req.body.id;
-    CategoryBase.findOne({id: id}).then(function(category){
+router.post('/category/editor',function(req,res,next){
+    var id = req.body.id || '';
+    var type = req.body.type || '';
+    var mark = req.body.mark || '';
 
-    })
     if(!type || !mark){
         responseData.code = 0;
         responseData.message = '分类信息不能为空!';
-        return res.render('admin/category_add',{
+        res.json({
             userInfo: req.userInfo,
             responseData: responseData
         });
-    }else{
-        /*分类是否存在*/
-       CategoryBase.findOne({id: id}).then(function(category){
-            if(category){
-                responseData.code = 0;
-                responseData.message = '该分类已经存在!';
-            }else{
-                responseData.code = 1;
-                responseData.message = '新增分类成功!';
-                var category = new CategoryBase({
-                    type: type,
-                    mark: mark,
-                    author: author
-                });
-                category.save();
-            }
-            res.render('admin/category_add',{
-                userInfo: req.userInfo,
-                responseData: responseData
-            });
-        });
     }
+
+    CategoryBase.findOne({_id: id}).then(function(category){
+        /*没有更名保存*/
+       if(category.type === type){
+           responseData.code = 1;
+           responseData.message = '保存成功!';
+           return res.json({
+               userInfo: req.userInfo,
+               responseData: responseData
+           });
+       }else{
+           /*修改过后保存验证,*/
+           CategoryBase.findOne({_id: {$ne:id},type:type}).then(function(category){
+               if(category){//存在同名
+                   responseData.code = 0;
+                   responseData.message = '分类名已存在!';
+                   return res.json({
+                       userInfo: req.userInfo,
+                       responseData: responseData
+                   });
+               }else{
+                   /*更改更新*/
+                   CategoryBase.update({_id: id},{type: type,mark: mark}).then(function(err){
+                       if(!err){
+                           responseData.code = 1;
+                           responseData.message = '保存成功!';
+                           return res.json({
+                               userInfo: req.userInfo,
+                               responseData: responseData
+                           });
+                       }
+                   })
+               }
+           });
+       }
+    })
 })
 
+/*博客文章列表*/
+router.get('/content',function(req,res,next){
+    res.render('admin/content_list',{
+        userInfo: req.userInfo
+    })
+})
+
+/*博客文章添加页面*/
+router.get('/content/add',function(req,res,next){
+    res.render('admin/content_list',{
+        userInfo: req.userInfo,
+        responseData: responseData
+    })
+})
 
 module.exports = router;
 
