@@ -211,7 +211,7 @@ router.get('/content',function(req,res,next){
 
 /*博客文章添加页面*/
 router.get('/content/add',function(req,res,next){
-    res.render('admin/content_list',{
+    res.render('admin/content_add',{
         userInfo: req.userInfo,
         responseData: responseData
     })

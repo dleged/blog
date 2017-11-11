@@ -4,51 +4,124 @@
 {% endblock %}
 {% block main %}
     <div class="col-lg-12">
-        <section class="panel col-md-12">
-            <div class="panel-heading">添加分类</div>
-            <div class="panel-body">
-                <form class="form-horizontal" action="./add" role="category" method="post">
-                        {% if !responseData.code %}
-                            <div class="error-msg col-md-10 form-group">
-                                {{ responseData.message }}
-                            </div>
-                        {% else %}
-                            <div class="success-msg col-md-10 form-group">
-                                {{ responseData.message }}
-                            </div>
-                        {% endif %}
-                    <div class="form-group col-sm-12">
-                        <label class="col-sm-2 control-label">博客分类</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="text" name="type" placeholder="请输博客入分类">
-                        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">博客内容</label>
+            <div class="col-sm-10">
+                <div id="alerts"></div>
+                <div class="btn-toolbar mg-b" data-role="editor-toolbar" data-target="#editor">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="Font">
+                            <i class="fa fa-font"></i>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                        </ul>
                     </div>
-                    <div class="form-group col-sm-12">
-                        <label class="col-sm-2 control-label">标签</label>
-                        <div class="col-sm-6">
-                            <select name="mark" multiple=""  class="form-control selectpicker" >
-                                <option>html</option>
-                                <option>css</option>
-                                <option>javascript</option>
-                                <option>react</option>
-                                <option>vue</option>
-                            </select>
-                        </div>
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="Font Size">
+                            <i class="fa fa-text-height"></i>&nbsp;
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a data-edit="fontSize 5">
+                                    <span class="h2">Huge</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-edit="fontSize 3">
+                                    <span class="h4">Normal</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-edit="fontSize 1">
+                                    <span class="h6">Small</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="form-group ">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary btn-parsley">保存</button>
-                        </div>
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" data-edit="bold" title="Bold (Ctrl/Cmd+B)">
+                            <i class="fa fa-bold"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="italic" title="Italic (Ctrl/Cmd+I)">
+                            <i class="fa fa-italic"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="strikethrough" title="Strikethrough">
+                            <i class="fa fa-strikethrough"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="underline" title="Underline (Ctrl/Cmd+U)">
+                            <i class="fa fa-underline"></i>
+                        </a>
                     </div>
-                </form>
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" data-edit="insertunorderedlist" title="Bullet list">
+                            <i class="fa fa-list-ul"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="insertorderedlist" title="Number list">
+                            <i class="fa fa-list-ol"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="outdent" title="Reduce indent (Shift+Tab)">
+                            <i class="fa fa-dedent"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="indent" title="Indent (Tab)">
+                            <i class="fa fa-indent"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)">
+                            <i class="fa fa-align-left"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)">
+                            <i class="fa fa-align-center"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)">
+                            <i class="fa fa-align-right"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)">
+                            <i class="fa fa-align-justify"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="Hyperlink">
+                            <i class="fa fa-link"></i>
+                        </a>
+                        <div class="dropdown-menu input-append">
+                            <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                            <button class="btn btn-default btn-sm" type="button">Add</button>
+                        </div>
+                        <a class="btn btn-default btn-sm" data-edit="unlink" title="Remove Hyperlink">
+                            <i class="fa fa-cut"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group pull-left">
+                        <a class="btn btn-default btn-sm" title="Insert picture (or just drag & drop)" id="pictureBtn">
+                            <i class="fa fa-picture-o"></i>
+                        </a>
+                        <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" data-edit="undo" title="Undo (Ctrl/Cmd+Z)">
+                            <i class="fa fa-undo"></i>
+                        </a>
+                        <a class="btn btn-default btn-sm" data-edit="redo" title="Redo (Ctrl/Cmd+Y)">
+                            <i class="fa fa-repeat"></i>
+                        </a>
+                    </div>
+                </div>
+                <div id="editor" class="form-control" contenteditable="true" style="overflow:scroll; height:100px">
+                    Go ahead&hellip;
+                </div>
             </div>
-        </section>
+        </div>
     </div>
 {% endblock %}
 
 {% block script %}
     <script src="/public/admin/vendor/bootstrap-select/bootstrap-select.js"></script>
+    <script src="/public/admin/vendor/wysiwyg/jquery.hotkeys.js"></script>
+    <script src="/public/admin/vendor/wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="/public/admin/vendor/switchery/switchery.js"></script>
     <script>
         $('.selectpicker').selectpicker('show');
     </script>
