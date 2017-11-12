@@ -107,71 +107,8 @@
 {% block script %}
     <script src="/public/admin/vendor/bootstrap-select/bootstrap-select.js"></script>
     <script>
-        !function(doc,$){
+        !function(doc,$) {
             'use stric'
-            $.prototype.extend({
-                setUrl: function(url){
-                    this.attr('href',url);
-                }
-            });
-
-            var confirm = '#confirm-delete';
-            var btnEditor  = '.btn-editor';
-            var btnDelete  = '.btn-delete';
-           /* var $confirmDelete = $('#confirm-delete');*/
-            var $editor = $('#editor-modal');
-            var deleteAction = '/admin/category/delete?id=';
-            var editorAction = './category/editor';
-
-            /*删除按钮*/
-            bindClick(btnDelete,function(){
-                var id = $(this).attr('data-id');
-                $('.btn-sure').setUrl(deleteAction + id);
-            });
-            /*编辑按钮*/
-            $('.selectpicker').selectpicker('show');
-            var editor = {};
-            bindClick(btnEditor,function(){
-                editor.id = $(this).attr('data-id');
-                editor.type = $(this).attr('data-type');
-                editor.mark = $(this).attr('data-mark');
-                setEditor(editor);
-                bindClick('#editor-modal .btn-sure',saveEditor);
-            });
-            /*编辑确认保存*/
-            function saveEditor(){
-                console.log(editorAction);
-                $.ajax({
-                    type: 'post',
-                    url: editorAction,
-                    data: {
-                        id: editor.id,
-                        type: $editor.find('[name="type"]').val(),
-                        mark: $editor.find('[name="mark"]').val().toString()
-                    },
-                    success: function(data){
-                        saveEditorSuccess.call(this,data);
-                    }
-                });
-            }
-            function setEditor(type,mark){
-                $editor.find('[name="type"]').val(editor.type);
-                $('.selectpicker').selectpicker('val',editor.mark.split(','));
-            }
-
-            function saveEditorSuccess(data){
-                var data = data.responseData;
-                if(!data.code){
-                    $editor.find('.error-msg').text(data.message);
-                }else{
-                    window.location.reload();
-                }
-            }
-
-            function bindClick(ele,fn){
-                $(doc).on('click',ele,fn);
-            }
-
         }(document,jQuery)
     </script>
 {% endblock %}

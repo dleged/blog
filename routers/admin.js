@@ -202,20 +202,32 @@ router.post('/category/editor',function(req,res,next){
     })
 })
 
-/*博客文章列表*/
-router.get('/content',function(req,res,next){
-    res.render('admin/content_list',{
-        userInfo: req.userInfo
-    })
-})
-
 /*博客文章添加页面*/
 router.get('/content/add',function(req,res,next){
+    CategoryBase.find({}).then(function(content){
+        if(content){
+            console.log(content);
+            responseData.code = 1;
+            responseData.message = '查询博客分类成功'
+            res.render('admin/content_add',{
+                userInfo: req.userInfo,
+                responseData: {
+                    code: 1,
+                    message: '查询博客分类成功',
+                    data: content
+                }
+            })
+        }
+    });
+})
+
+/*博客文章列表*/
+/*router.get('/content/add',function(req,res,next){
     res.render('admin/content_add',{
         userInfo: req.userInfo,
         responseData: responseData
     })
-})
+})*/
 
 module.exports = router;
 
