@@ -3,15 +3,14 @@
 {% endblock %}
 {% extends './template/layout.html' %}
     {% block main %}
-        <div class="col-md-12">
+        <div class="panel">
             <section class="panel">
                 <div class="panel-heading col-md-12">用户列表</div>
                 <div class="panel-body">
                     <table class="table no-margin col-md-12">
                         <thead>
                             <tr>
-                                <th>类型</th>
-                                <th>标签</th>
+                                <th>博客类型</th>
                                 <th>添加者</th>
                                 <th>创建日期</th>
                                 <th>修改日期</th>
@@ -19,26 +18,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for category in responseData.data %}
+                            {% for item in responseData.data %}
                                 <tr>
-                                    <td>{{ category.type }}</td>
-                                    <td>{{ category.mark }}</td>
-                                    <td>{{ category.author }}</td>
-                                    <td>{{ category.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
-                                    <td>{{ category.updateTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
+                                    <td>{{ item.type }}</td>
+                                    <td>{{ item.author }}</td>
+                                    <td>{{ item.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
+                                    <td>{{ item.updateTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
                                     <td>
                                         <button data-target="#editor-modal"
                                             data-toggle="modal"
-                                            data-id="{{category._id.toString()}}"
-                                            data-type="{{category.type}}"
-                                            data-mark="{{category.mark}}"
+                                            data-id="{{item._id.toString()}}"
+                                            data-type="{{item.type}}"
+                                            data-mark="{{item.mark}}"
                                             class="btn-editor btn-primary btn-sm">
                                             <i class="fa fa fa-pencil-square-o mg-l-xs"></i>
                                             编辑
                                         </button>
                                         <button data-target="#confirm-delete"
                                             data-toggle="modal"
-                                            data-id="{{category._id.toString()}}"
+                                            data-id="{{item._id.toString()}}"
                                             class="btn-delete btn-default btn-sm">
                                             <i class="fa fa-times-circle-o mg-l-xs"></i>
                                             删除
@@ -63,9 +61,8 @@
                     <button class="btn-default btn-sm">
                     <i class="fa fa-times-circle-o mg-l-xs"></i>取消</button>
                 </a>
-                <a href="/admin/category/delete?" class="btn-sure">
-                    <button class="btn-primary btn-smmodal-close">
-                    <i class="fa fa-check-circle-o mg-l-xs"></i>确定</button>
+                <a href="/admin/category/delete?" class="btn-primary btn-smmodal-close btn-sure">
+                    <i class="fa fa-check-circle-o mg-l-xs"></i>确定
                 </a>
             </div>
         </div>
@@ -81,7 +78,7 @@
                         <input class="form-control" type="text" name="type" placeholder="请输博客入分类">
                     </div>
                 </div>
-                <div class="form-group col-sm-12">
+                <!--<div class="form-group col-sm-12">
                     <label class="col-sm-3 control-label">标签</label>
                     <div class="col-sm-8">
                         <select name="mark" multiple=""  class="form-control selectpicker" >
@@ -92,7 +89,7 @@
                             <option>vue</option>
                         </select>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn-default btn-sm modal-close">
@@ -121,7 +118,7 @@
            /* var $confirmDelete = $('#confirm-delete');*/
             var $editor = $('#editor-modal');
             var deleteAction = '/admin/category/delete?id=';
-            var editorAction = './category/editor';
+            var editorAction = '/admin/category/editor';
 
             /*删除按钮*/
             bindClick(btnDelete,function(){
@@ -134,7 +131,7 @@
             bindClick(btnEditor,function(){
                 editor.id = $(this).attr('data-id');
                 editor.type = $(this).attr('data-type');
-                editor.mark = $(this).attr('data-mark');
+                /*editor.mark = $(this).attr('data-mark');*/
                 setEditor(editor);
                 bindClick('#editor-modal .btn-sure',saveEditor);
             });
@@ -146,8 +143,7 @@
                     url: editorAction,
                     data: {
                         id: editor.id,
-                        type: $editor.find('[name="type"]').val(),
-                        mark: $editor.find('[name="mark"]').val().toString()
+                        type: $editor.find('[name="type"]').val()
                     },
                     success: function(data){
                         saveEditorSuccess.call(this,data);
@@ -156,7 +152,6 @@
             }
             function setEditor(type,mark){
                 $editor.find('[name="type"]').val(editor.type);
-                $('.selectpicker').selectpicker('val',editor.mark.split(','));
             }
 
             function saveEditorSuccess(data){
@@ -164,7 +159,7 @@
                 if(!data.code){
                     $editor.find('.error-msg').text(data.message);
                 }else{
-                    window.location.reload();
+                    location.href ='/admin/category/';
                 }
             }
 

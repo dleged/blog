@@ -3,15 +3,17 @@
 {% endblock %}
 {% extends './template/layout.html' %}
     {% block main %}
-        <div class="col-md-12">
+        <div class="panel">
             <section class="panel">
-                <div class="panel-heading col-md-12">用户列表</div>
+                <div class="panel-heading col-md-12">博客列表</div>
                 <div class="panel-body">
                     <table class="table no-margin col-md-12">
                         <thead>
                             <tr>
-                                <th>类型</th>
+                                <th>标题</th>
+                                <th>分类</th>
                                 <th>标签</th>
+                                <th>内容</th>
                                 <th>添加者</th>
                                 <th>创建日期</th>
                                 <th>修改日期</th>
@@ -19,26 +21,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for category in responseData.data %}
+                            {% for item in responseData.data %}
                                 <tr>
-                                    <td>{{ category.type }}</td>
-                                    <td>{{ category.mark }}</td>
-                                    <td>{{ category.author }}</td>
-                                    <td>{{ category.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
-                                    <td>{{ category.updateTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
+                                    <td>{{ item.title }}</td>
+                                    <td>{{ item.type }}</td>
+                                    <td>{{ item.mark }}</td>
+                                    <td>{{ item.content }}</td>
+                                    <td>{{ item.author }}</td>
+                                    <td>{{ item.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
+                                    <td>{{ item.updateTime|date('Y-m-d H:i:s', -480, 'CCT') }}</td>
                                     <td>
-                                        <button data-target="#editor-modal"
-                                            data-toggle="modal"
-                                            data-id="{{category._id.toString()}}"
-                                            data-type="{{category.type}}"
-                                            data-mark="{{category.mark}}"
-                                            class="btn-editor btn-primary btn-sm">
+                                        <a class="btn-editor btn-primary btn-sm"
+                                           href="/admin/content/add?editor_id={{item._id.toString()}}">
                                             <i class="fa fa fa-pencil-square-o mg-l-xs"></i>
                                             编辑
-                                        </button>
+                                        </a>
                                         <button data-target="#confirm-delete"
                                             data-toggle="modal"
-                                            data-id="{{category._id.toString()}}"
+                                            data-id="{{item._id.toString()}}"
                                             class="btn-delete btn-default btn-sm">
                                             <i class="fa fa-times-circle-o mg-l-xs"></i>
                                             删除
@@ -56,14 +56,14 @@
         <div id="confirm-delete" class="modal">
             <h5 class="modal-header">删除确认</h5>
             <div class="modal-content">
-                确定删除该分类吗？
+                确定删除该条博客吗？
             </div>
             <div class="modal-footer">
                 <a href="#" data-dismiss="modal" class="modal-close">
                     <button class="btn-default btn-sm">
                     <i class="fa fa-times-circle-o mg-l-xs"></i>取消</button>
                 </a>
-                <a href="/admin/category/delete?" class="btn-sure">
+                <a href="/admin/content/delete?" class="btn-sure">
                     <button class="btn-primary btn-smmodal-close">
                     <i class="fa fa-check-circle-o mg-l-xs"></i>确定</button>
                 </a>
@@ -107,8 +107,26 @@
 {% block script %}
     <script src="/public/admin/vendor/bootstrap-select/bootstrap-select.js"></script>
     <script>
-        !function(doc,$) {
+        !function(doc,$){
             'use stric'
+            $.prototype.extend({
+                setUrl: function(url){
+                    this.attr('href',url);
+                }
+            });
+            var confirm = '#confirm-delete';
+            var btnDelete  = '.btn-delete';
+            /* var $confirmDelete = $('#confirm-delete');*/
+            var deleteAction = '/admin/content/delete?id=';
+            /*删除按钮*/
+            bindClick(btnDelete,function(){
+                var id = $(this).attr('data-id');
+                $('.btn-sure').setUrl(deleteAction + id);
+            });
+
+            function bindClick(ele,fn){
+                $(doc).on('click',ele,fn);
+            }
         }(document,jQuery)
     </script>
 {% endblock %}

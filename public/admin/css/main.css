@@ -1713,6 +1713,7 @@ pre {
     color: #444444;
     background-color: #dde1e7;
     border-color: #dde1e7;
+    height: 26px;
 }
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
     color: #444444;
@@ -1733,6 +1734,12 @@ a.btn-default {
     color: #ffffff;
     background-color: #17c3e5;
     border-color: #17c3e5;
+    padding: 6px 10px;
+    font-size: 12px;
+    line-height: 17px;
+    border-radius: 3px;
+    height: 26px;
+    display: inline-block;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
     color: #ffffff;

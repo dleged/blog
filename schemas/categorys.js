@@ -5,7 +5,6 @@ var Schema = require('mongoose').Schema;
 
 var category = new Schema({
         type: String,
-        mark: String,
         author: String,
         createTime: {
             type: Date,

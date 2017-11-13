@@ -120,6 +120,12 @@ textarea {
 }
 button {
     overflow: visible;
+    padding: 0px;
+    outline: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
 }
 button,
 select {
@@ -3089,6 +3095,9 @@ fieldset[disabled] .btn-default.active {
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
+    padding: 6px 10px;
+    font-size: 12px;
+    line-height: 17px;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -3352,10 +3361,13 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-sm,
 .btn-group-sm > .btn {
-    padding: 5px 10px;
+    padding: 6px 10px;
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 17px;
     border-radius: 3px;
+    height: 26px;
+    display: inline-block;
+    width: auto;
 }
 .btn-xs,
 .btn-group-xs > .btn {
@@ -5726,7 +5738,7 @@ button.close {
     right: 0;
     background-color: #fafafa;
     padding: 0;
-    /* max-height: 70%; */
+    top: 15%;
     width: 55%;
     margin: auto;
     /* overflow-y: auto; */
