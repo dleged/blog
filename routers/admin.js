@@ -327,7 +327,7 @@ router.get('/content',function(req,res,next){
                     pages: pages,
                     page: page,
                     limit: limit,
-                    url: '/admin/content_list'
+                    url: '/admin/content'
                 }
             });
         });
