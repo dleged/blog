@@ -52,9 +52,9 @@ app.use(function(req,res,next){
 /*
 * 根据不同的功能划分模块
 * */
-app.use('/',require('./routers/main'));
-app.use('/api',require('./routers/api'));//后台接口路由
-app.use('/admin',require('./routers/admin'));
+app.use('/',require('./routers/main/main'));
+app.use('/api',require('./routers/admin/api'));//后台接口路由
+app.use('/admin',require('./routers/admin/admin'));
 
 //监听http请求
 //用户发送http - url - 解析路由 - 找到匹配规则 -

@@ -1,0 +1,23 @@
+<heard class="headerV">
+    <div class="headerv-nav">
+        <a href="/front-end">前端开发</a>
+        <a href="/user/timeline" class="">UED实验室</a>
+        <a href="/admin" class="">后台管理</a>
+        <a href="/channel/" class="">关于我</a>
+    </div>
+    <div class="headerv-user">
+        {%if userInfo.username %}
+        <a class="router-link-active">
+            {% if userInfo.isAdmin %}
+            管理员,
+            {% else %}
+            hello,
+            {% endif %}
+            {{ userInfo.username  }}
+        </a>
+        <a class="headerv-logout"></a>
+        {%else%}
+        <a class="headerv-login">登录</a>
+        {%endif%}
+    </div>
+</heard>

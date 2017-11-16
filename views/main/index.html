@@ -14,30 +14,15 @@
 	</head>
 	<body>
         <div class="main-bolg">
-            <heard class="headerV">
-                <div class="headerv-nav">
-                    <a href="/front-end">前端开发</a>
-                    <a href="/user/timeline" class="">UED实验室</a>
-                    <a href="/channel/" class="">关于我</a>
+            <!--博客菜单导航-->
+            {% include "./template/header.html" %}
+            <div class="blog-main">
+                <div class="blog-content">
+                    <!--博客内容列表-->
+                    {% include "./template/content_list.html" %}
+                    <!--博客标签，信息等其他模块-->
+                    {% include "./template/content_secondly.html" %}
                 </div>
-                <div class="headerv-user">
-                    {%if userInfo.username %}
-                    <a class="router-link-active">
-                        {% if userInfo.isAdmin %}
-                            管理员,
-                        {% else %}
-                            hello,
-                        {% endif %}
-                        {{ userInfo.username  }}
-                    </a>
-                    <a class="headerv-logout"></a>
-                    {%else%}
-                    <a class="headerv-login">登录</a>
-                    {%endif%}
-                </div>
-            </heard>
-            <div class="blog-content">
-                
             </div>
         </div>
 	<!-- jQuery -->

@@ -1,10 +1,10 @@
 @charset "UTF-8";
-*{box-sizing: border-box;}
+div,p,section,h1,h2,h3,h4,h5,h6,span,article,textarea,input,select{box-sizing: border-box;}
 body {
     line-height: 1.5;
     font-family: 'Microsoft Yahei';
     background: #ebebeb;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 0;
     margin: 0;
 }
@@ -51,17 +51,28 @@ button{
     height: 0;
     content: "."
 }
+.main-bolg{
+    /* overflow: scroll; */
+}
+.headerV::after{
+    content: '';
+    clear: both;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
 /*顶部导航*/
 .headerV{
     padding: 0 20px;
     position: relative;
-    height: 80px;
+    height: 60px;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,.04);
     width: 100%;
     min-width: 1000px;
     float: left;
     overflow: hidden;
+    box-sizing: border-box;
 }
 .headerv-nav{
     float: left;
@@ -70,17 +81,17 @@ button{
     float: left;
     display: inline-block;
     padding: 0 12px;
-    height: 76px;
+    height: 60px;
     color: #999;
     font-size: 14px;
-    line-height: 80px;
+    line-height: 60px;
 }
 .headerV .headerv-nav a:hover, .headerV .headerv-nav a.router-link-active {
     border-bottom: 4px solid #6ed56c;
 }
 .headerV .headerv-user {
     float: right;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 .headerv-user .headerv-login {
     color: #6ed56c;
@@ -251,7 +262,6 @@ button{
     height: 30px;
     margin: 24px auto 0;
 }
-
 .modal-overlay{
     position: fixed;
     left: 0;
@@ -262,4 +272,54 @@ button{
     z-index: 999;
     opacity: 1;
     text-align: center;
+}
+
+/*博客主体*/
+.blog-main{
+    position: relative;
+    clear: both;
+}
+.blog-content{
+    margin: 0 auto;
+    clear: both;
+    top: 20px;
+    position: relative;
+    width: 1100px;
+}
+.blog-piece{
+    width: 880px;
+    padding: 10px 55px 20px;
+    margin-bottom: 20px;
+    background: white;
+}
+.blog-piece > .blog-title a{
+    text-decoration: none;
+    color: #141412;
+}
+.blog-meta a {
+    color: #1F7A65;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    text-decoration: none;
+}
+.blog-excerpt{overflow: hidden;}
+.blog-title{font-size: 20px;}
+.read-more{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ffffff;
+    background-color: #164;
+    float: right;
+}
+@media only screen and (max-width: 960px){
+    .blog-content{
+        width: 100%;
+    }
 }

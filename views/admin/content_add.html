@@ -181,17 +181,21 @@
     <script src="/public/admin/vendor/wysiwyg/jquery.hotkeys.js"></script>
     <script src="/public/admin/vendor/wysiwyg/bootstrap-wysiwyg.js"></script>
     <script src="/public/admin/vendor/switchery/switchery.js"></script>
+    <script src="/public/admin/vendor/jquery.base64.js"></script>
     <script>
         !function(doc,$){
             var addUrl = '/admin/content/add';
             $('.selectpicker').selectpicker('show');
             function initToolbarBootstrapBindings() {
-                var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 'Courier New', 'Comic Sans MS',
-                            'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times', 'Times New Roman', 'Verdana'],
+                var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black',
+                    'Courier', 'Courier New', 'Comic Sans MS',
+                    'Helvetica', 'Impact', 'Lucida Grande',
+                    'Lucida Sans', 'Tahoma', 'Times', 'Times New Roman', 'Verdana'],
                         fontTarget = $('[title=Font]').siblings('.dropdown-menu');
                 $.each(fonts, function(idx, fontName) {
                     fontTarget.append(
-                            $('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">\
+                            $('<li><a data-edit="fontName '
+                               + fontName + '" style="font-family:\'' + fontName + '\'">\
                                + fontName + </a></li>'));
                 });
                 $('a[title]').tooltip({container: 'body'});
