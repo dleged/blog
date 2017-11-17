@@ -259,6 +259,7 @@ router.post('/content/add',function(req,res,next){
     var type    = req.body.type || '';
     var mark    = req.body.mark || '';
     var content = req.body.content || '';
+    var type    = req.body.type || '';
     var contentSave = new contentBase({
         title: title,
         type: type,

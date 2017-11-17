@@ -9,6 +9,7 @@ module.exports = new Schema({
     type: String,
     mark: String,
     content: String,
+    info: String,
     author: String,
     createTime:{
         type: Date,

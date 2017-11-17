@@ -235,12 +235,15 @@
                 fileUploadError: showErrorAlert
             });
             /*博客内容保存*/
+            var content = $('#editor').html();
+            var type = $('#editor').text();
             $('#save-blog').bind('click',function(e){
                 var valArr = [
                         $('#title').val(),
                         $('#type').val(),
                         $('#mark').val(),
-                        $('#editor').html()
+                        content,
+                        type.length > 60 ? type.slice(0,60) : type
                 ]
                 if(!valArr.indexOf("")){
                     $('.error-msg').text('信息不能为空');
@@ -256,6 +259,7 @@
                         type: valArr[1],
                         mark: valArr[2],
                         content: valArr[3],
+                        type: valArr[4]
                     },
                     success: function(data){
                         if(data.responseData.code){
