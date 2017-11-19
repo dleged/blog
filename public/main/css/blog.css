@@ -323,3 +323,42 @@ button{
         width: 100%;
     }
 }
+.pagination {
+    position: relative;
+    width: 80%;
+    max-width: 710px;
+    margin: 4rem auto;
+    font-size: 1.4rem;
+    color: #666;
+    text-align: center;
+}
+.pagination a {
+    color: #FFF;
+    transition: all 0.2s ease;
+    background: #1F7A65;
+}
+.newer-posts {
+    left: 0;
+}
+.older-posts, .newer-posts {
+    position: absolute;
+    display: inline-block;
+    font-size: 2rem;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    transition: border 0.3s ease;
+}
+.pagination {
+    position: relative;
+    width: 80%;
+    max-width: 710px;
+    margin: 4rem auto;
+    font-size: 1.4rem;
+    color: #666;
+    text-align: center;
+}
+.page-number {
+    display: inline-block;
+    padding: 1.5rem 0;
+    min-width: 100px;
+}
