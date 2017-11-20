@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="/public/admin/vendor/bootstrap-select/bootstrap-select.css">
 {% endblock %}
 {% block main %}
-    <div class="panel white-bg f-l">
+    <div class="panel white-bg f-l" id="blog-add" data-id="{{ responseData.data.textInfo._id.toString() }}">
         <div class="panel-heading col-md-12">用户列表</div>
         {% if responseData.message %}
         <div class="tip-text error-msg col-md-10 form-group">
@@ -235,17 +235,18 @@
                 fileUploadError: showErrorAlert
             });
             /*博客内容保存*/
-            var content = $('#editor').html();
-            var type = $('#editor').text();
             $('#save-blog').bind('click',function(e){
+                var info = $('#editor').text(),
+                    info = info.length > 60 ? info.slice(0,60) : info;
                 var valArr = [
                         $('#title').val(),
                         $('#type').val(),
                         $('#mark').val(),
-                        content,
-                        type.length > 60 ? type.slice(0,60) : type
+                        $('#editor').html(),
+                        $('#blog-add').attr('data-id')
+
                 ]
-                if(!valArr.indexOf("")){
+                if(valArr.indexOf("") != -1){
                     $('.error-msg').text('信息不能为空');
                     return false;
                 }
@@ -259,11 +260,12 @@
                         type: valArr[1],
                         mark: valArr[2],
                         content: valArr[3],
-                        type: valArr[4]
+                        info: valArr[4],
+                        id: valArr[5]
                     },
                     success: function(data){
                         if(data.responseData.code){
-                            location.href = './';
+                            location.href = '/admin/content';
                         }
                     }
                 });

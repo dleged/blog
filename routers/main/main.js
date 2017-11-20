@@ -17,7 +17,7 @@ router.get('/',function(req,res,next){
         page = Math.min(page,pages); //page不能超过总页数
         page = Math.max(page,1);     //page不能小于第1页
         skip = (page - 1) * limit;
-        ContentBase.find('title author createTime info').limit(limit).skip(skip).then(function(contents){
+        ContentBase.find('title author createTime info').sort({_id: -1}).limit(limit).skip(skip).then(function(contents){
             if(contents){
                 res.render('main/index',{
                     userInfo: req.userInfo,

@@ -323,15 +323,6 @@ button{
         width: 100%;
     }
 }
-.pagination {
-    position: relative;
-    width: 80%;
-    max-width: 710px;
-    margin: 4rem auto;
-    font-size: 1.4rem;
-    color: #666;
-    text-align: center;
-}
 .pagination a {
     color: #FFF;
     transition: all 0.2s ease;
@@ -341,24 +332,25 @@ button{
     left: 0;
 }
 .older-posts, .newer-posts {
-    position: absolute;
     display: inline-block;
-    font-size: 2rem;
-    padding: 1rem 1.5rem;
+    font-size: 16px;
+    padding: 10px 15px;
     text-decoration: none;
     transition: border 0.3s ease;
 }
 .pagination {
     position: relative;
-    width: 80%;
-    max-width: 710px;
-    margin: 4rem auto;
-    font-size: 1.4rem;
+    width: 880px;
+    margin: 40px auto;
+    font-size: 16px;
     color: #666;
     text-align: center;
+    box-sizing: border-box;
+    float: left;
 }
 .page-number {
     display: inline-block;
-    padding: 1.5rem 0;
-    min-width: 100px;
+    padding: 10px 0;
+    min-width: 189px;
+    margin: 0 40px;
 }

@@ -52,7 +52,7 @@ app.use(function(req,res,next){
 /*
 * 根据不同的功能划分模块
 * */
-app.use('/index',require('./routers/main/main'));
+app.use(['/index','/'],require('./routers/main/main'));
 app.use('/api',require('./routers/admin/api'));//后台接口路由
 app.use('/admin',require('./routers/admin/admin'));
 

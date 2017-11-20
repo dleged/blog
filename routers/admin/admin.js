@@ -218,10 +218,9 @@ router.get('/content/add',function(req,res,next){
     var _id = req.query.editor_id || '';
     CategoryBase.find({}).then(function(Category) {//获取分类列表
         if (Category) {
-            if (_id) {//编辑-保存
+            if (_id) {//编辑-保存，返回博客的信息
                 contentBase.find({_id: _id}).then(function (content) {
                     if (content) {
-                        console.log('title',content);
                         res.render('admin/content_add', {
                             userInfo: req.userInfo,
                             responseData: {
@@ -237,7 +236,7 @@ router.get('/content/add',function(req,res,next){
                     }
                 })
             } else {
-                //编辑-保存
+                //新增-保存，直接渲染页面
                 res.render('admin/content_add', {
                     userInfo: req.userInfo,
                     responseData: {
@@ -253,22 +252,24 @@ router.get('/content/add',function(req,res,next){
     })
 })
 
-/*博客文章添加保存*/
+/*博客文章添加&&编辑保存*/
 router.post('/content/add',function(req,res,next){
     var title   = req.body.title || '';
     var type    = req.body.type || '';
     var mark    = req.body.mark || '';
     var content = req.body.content || '';
-    var type    = req.body.type || '';
+    var info    = req.body.info || '';
     var contentSave = new contentBase({
         title: title,
         type: type,
         mark: mark,
         content: content,
-        author: req.userInfo.username
+        author: req.userInfo.username,
+        info: info
+
     });
-    var _id = req.body.editor_id || '';
     /*编辑-保存入口*/
+    var _id = req.body.id || '';//如果参数传递博客id,则为编辑的保存
     if(_id){
         CategoryBase.update({_id:_id},{
             title: title,
@@ -282,23 +283,22 @@ router.post('/content/add',function(req,res,next){
             }
         });
         return;
-    }
-
-    /*添加-保存入口*/
-    contentSave.save().then(function(content){
-        if(content){
-            responseData.code = 1;
-            responseData.message = '新增博客成功';
-        }else{
-            responseData.code = 0;
-            responseData.message = '新增博客失败';
-        }
-        res.json({
-            serInfo: req.userInfo,
-            responseData: responseData
+    }else{
+        /*添加-保存入口*/
+        contentSave.save().then(function(content){
+            if(content){
+                responseData.code = 1;
+                responseData.message = '新增博客成功';
+            }else{
+                responseData.code = 0;
+                responseData.message = '新增博客失败';
+            }
+            res.json({
+                serInfo: req.userInfo,
+                responseData: responseData
+            });
         });
-    });
-
+    }
 })
 
 /*博客文章列表*/
