@@ -237,19 +237,19 @@
             /*博客内容保存*/
             $('#save-blog').bind('click',function(e){
                 var info = $('#editor').text(),
-                    info = info.length > 60 ? info.slice(0,60) : info;
+                    info = info.length > 60 ? info.slice(0,60) : info,
+                    _id  = $('#blog-add').attr('data-id')
                 var valArr = [
                         $('#title').val(),
                         $('#type').val(),
                         $('#mark').val(),
-                        $('#editor').html(),
-                        $('#blog-add').attr('data-id')
-
+                        $('#editor').html()
                 ]
                 if(valArr.indexOf("") != -1){
                     $('.error-msg').text('信息不能为空');
                     return false;
                 }
+                valArr.push(_id);
                 e && e.stopPropagation();
                 window.event && (window.event.cancelable = true);
                 $.ajax({

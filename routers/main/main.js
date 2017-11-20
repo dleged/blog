@@ -5,7 +5,9 @@ var express = require('express');
 var router = express.Router();
 var ContentBase = require('../../models/content');
 
-
+/*
+ * 博客首页
+ * */
 router.get('/',function(req,res,next){
     /*从博客列表中读取列表*/
     var limit = 2; //读取的条数
@@ -36,6 +38,26 @@ router.get('/',function(req,res,next){
             }
         });
     })
+})
+
+/*
+* 博客详情
+* */
+router.get('/list',function(req,res,next){
+    var id = req.query._id;
+    ContentBase.findOne({_id: id}).then(function(content){
+        console.log(content);
+        if(content){
+            res.render('main/article_details',{
+                userInfo: req.userInfo,
+                responseData: {
+                    code: 1,
+                    message: '博客详情查询成功！',
+                    data: content
+                }
+            });
+        }
+    });
 })
 
 module.exports = router;

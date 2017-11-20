@@ -1,18 +1,20 @@
 <section class="content-list content">
     {% for item in responseData.data %}
+    <!--博客列表-->
     <article class="blog-piece">
-        <h2 class="blog-title"><a href="/web-app-adapter-iphone-x/">{{ item.title }}</a></h2>
+        <h2 class="blog-title"><a href="./index/list_id={{ item.id }}">{{ item.title }}</a></h2>
         <div class="blog-meta">
-            <a href="/author/shenfei/">{{item.author}}</a>
+            <a href="#">{{item.author}}</a>
             on ,
             <time class="post-date" datetime="2017-10-26">{{ item.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</time>
         </div>
         <section class="blog-excerpt">
             <p> {% autoescape %}{{ item.info }}{% endautoescape %} </p>
-            <p><a class="read-more" href="/web-app-adapter-iphone-x/">查看全文</a></p>
+            <p><a class="read-more" href="./index/list?_id={{ item.id }}">查看全文</a></p>
         </section>
     </article>
     {% endfor %}
+    <!--上下页-->
     <nav class="pagination" role="navigation">
         {% if responseData.page!= 1  %}
         <a class="newer-posts" href="./index?page={{ responseData.page-1 }}">
