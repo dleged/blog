@@ -15,14 +15,13 @@ router.use(function(req,res,next){
     next();
 });
 
+
 /*
-* 用户注册
-*   注册逻辑
-*   用户名不能为空
-*   密码不能为空
-*   两次密码必须一致
-*
-*   1.用户名是否被注册-数据库查询
+*   1.注册逻辑
+*   2.用户名不能为空
+*   3.密码不能为空
+*   4.两次密码必须一致
+*   5.用户名是否被注册-数据库查询
 * */
 router.post('/user/register',function(req,res,next){
     var json = req.body;

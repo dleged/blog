@@ -5,7 +5,6 @@ var express = require('express');
 var router = express.Router();
 var UserBase = require('../../models/user');
 var CategoryBase = require('../../models/category');
-//var markDown = require('markdown');
 
 //返回统一的对象
 var responseData;
