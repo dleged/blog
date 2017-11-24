@@ -3,7 +3,7 @@ div,p,section,h1,h2,h3,h4,h5,h6,span,article,textarea,input,select{box-sizing: b
 body {
     line-height: 1.5;
     font-family: 'Microsoft Yahei';
-    background: #ebebeb;
+    background: #d3d3d3;
     /* overflow: hidden; */
     padding: 0;
     margin: 0;
@@ -291,6 +291,11 @@ button{
     padding: 10px 55px 20px;
     margin-bottom: 20px;
     background: white;
+}
+.blog-code{
+    -webkit-box-shadow: 0 0 2.5em #5d656c;
+    -moz-box-shadow: 0 0 2.5em #5d656c;
+    box-shadow: 0 0 2.5em #5d656c;
 }
 .blog-piece > .blog-title a{
     text-decoration: none;
