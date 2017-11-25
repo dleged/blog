@@ -288,7 +288,7 @@ button{
 }
 .blog-piece{
     width: 880px;
-    padding: 10px 55px 20px;
+    /* padding: 10px 55px 20px; */
     margin-bottom: 20px;
     background: white;
 }
@@ -308,7 +308,8 @@ button{
     text-decoration: none;
 }
 .blog-excerpt{overflow: hidden;}
-.blog-title{font-size: 20px;}
+.blog-title{font-size: 26px;padding-left: 20px;padding-top: 20px;position: relative;}
+.blog-meta{padding-left: 20px;}
 .read-more{
     display: inline-block;
     text-align: center;
@@ -322,6 +323,9 @@ button{
     color: #ffffff;
     background-color: #164;
     float: right;
+    right: 20px;
+    position: relative;
+    bottom: 20px;
 }
 @media only screen and (max-width: 960px){
     .blog-content{
