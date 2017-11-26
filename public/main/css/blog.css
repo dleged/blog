@@ -326,6 +326,7 @@ button{
     right: 20px;
     position: relative;
     bottom: 20px;
+    margin-top: 30px;
 }
 @media only screen and (max-width: 960px){
     .blog-content{
@@ -337,6 +338,7 @@ button{
     transition: all 0.2s ease;
     background: #1F7A65;
 }
+.blog-article{padding-left: 20px;text-indent: 20px;}
 .newer-posts {
     left: 0;
 }

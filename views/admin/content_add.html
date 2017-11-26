@@ -238,12 +238,14 @@
             $('#save-blog').bind('click',function(e){
                 var info = $('#editor').text(),
                     info = info.length > 60 ? info.slice(0,60) : info,
-                    _id  = $('#blog-add').attr('data-id')
+                    _id  = $('#blog-add').attr('data-id'),
+                    info = $('#editor').text();
                 var valArr = [
                         $('#title').val(),
                         $('#type').val(),
                         $('#mark').val(),
-                        $('#editor').html()
+                        $('#editor').html(),
+                        info.length > 20 ? info.slice(0,20) : info
                 ]
                 if(valArr.indexOf("") != -1){
                     $('.error-msg').text('信息不能为空');
