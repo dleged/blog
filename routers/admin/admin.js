@@ -265,7 +265,6 @@ router.post('/content/add',function(req,res,next){
         content: content,
         author: req.userInfo.username,
         info: info
-
     });
     /*编辑-保存入口*/
     var _id = req.body.id || '';//如果参数传递博客id,则为编辑的保存
@@ -278,13 +277,18 @@ router.post('/content/add',function(req,res,next){
             author: req.userInfo.username
         }).then(function(content){
             if(content){
-                res.redirect('/admin/content');
+                responseData.code = 1;
+                responseData.message = '新增博客成功';
+                res.json({
+                    serInfo: req.userInfo,
+                    responseData: responseData
+                });
             }
         });
         return;
     }else{
         /*添加-保存入口*/
-        contentSave.save().then(function(content){
+        contentSave.save().then(function(content,err){
             if(content){
                 responseData.code = 1;
                 responseData.message = '新增博客成功';

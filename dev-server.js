@@ -21,7 +21,7 @@ const path = require('path');
 const cp = require('child_process');
 const User = require('./models/user');
 //const DB_NAME = 'mongodb://47.96.167.149:27017/usr/local/mongodb/db/blogDB';//连接远mongodb
-const DB_NAME = 'mongodb://localhost:27017/blog';
+const DB_NAME = 'mongodb://localhost:27017/db';
 //创建app应用 ==》nodeJs 中的http.createServer();
 const app = express();
 
@@ -71,23 +71,9 @@ app.use(function(req,res,next){
  * 用户发送http - url - 解析路由 - 找到匹配规则 -
  * 指定绑定函数，返回对象内容至用户
  * */
-app.use('/index',require('./routers/main/main'));
+app.use('/',require('./routers/main/main'));
 app.use('/api',require('./routers/admin/api'));//后台接口路由
 app.use('/admin',require('./routers/admin/admin'));
-
-//const spawn = cp.spawn('mongod',['--port 27017'],{cwd:'E:/MongonDB/bin/'});
-////'--dbpath "D:/nodeProject/untitled/blog/db"',
-//console.log(spawn);
-//spawn.stdout.on('data', function(data){
-//    console.log(data.toString());
-//    if(!data){
-//        console.info('**********连接mongoose数据失败**********');
-//    }else{
-//        console.info('**********连接mongoose数据成功**********');
-//        app.listen(port);
-//        console.info('**********服务器启动成功端口' + port + '**********');
-//    }
-//})
 
 mongoose.connect(DB_NAME,function(err){
     if(err){

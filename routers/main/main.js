@@ -8,7 +8,7 @@ var ContentBase = require('../../models/content');
 /*
  * 博客首页
  * */
-router.get('/',function(req,res,next){
+router.get('/index',function(req,res,next){
     /*从博客列表中读取列表*/
     var limit = 2; //读取的条数
     var page = Number(req.query.page || 1);//当前页数
@@ -19,7 +19,8 @@ router.get('/',function(req,res,next){
         page = Math.min(page,pages); //page不能超过总页数
         page = Math.max(page,1);     //page不能小于第1页
         skip = (page - 1) * limit;
-        ContentBase.find('title author createTime info').sort({_id: -1}).limit(limit).skip(skip).then(function(contents){
+        ContentBase.find('title author createTime info').sort({_id: -1}).limit(limit).skip(skip)
+            .then(function(contents){
             if(contents){
                 res.render('main/index',{
                     userInfo: req.userInfo,
