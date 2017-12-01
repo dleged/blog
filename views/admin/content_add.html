@@ -237,15 +237,19 @@
             /*博客内容保存*/
             $('#save-blog').bind('click',function(e){
                 var info = $('#editor').text(),
-                    info = info.length > 60 ? info.slice(0,60) : info,
+                    _info = info.length > 60 ? info.slice(0,60) : info,
+                    _title =  $('#title').val(),
+                    _content = $('#editor').html(),
                     _id  = $('#blog-add').attr('data-id'),
-                    info = $('#editor').text();
+                    _type = $('#type').val() ? $('#type').val() : "",
+                    _mark = $('#mark').val() ? $('#mark').val() : "",
+                    _info = $('#editor').text();
                 var valArr = [
-                        $('#title').val(),
-                        $('#type').val(),
-                        $('#mark').val(),
-                        $('#editor').html(),
-                        info.length > 20 ? info.slice(0,20) : info
+                        _title,
+                        _type,
+                        _mark,
+                        _content,
+                        _info
                 ]
                 if(valArr.indexOf("") != -1){
                     $('.error-msg').text('信息不能为空');
