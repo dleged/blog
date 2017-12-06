@@ -288,7 +288,7 @@ button{
 }
 .blog-piece{
     width: 880px;
-    /* padding: 10px 55px 20px; */
+    padding: 25px;
     margin-bottom: 20px;
     background: white;
 }
@@ -308,8 +308,8 @@ button{
     text-decoration: none;
 }
 .blog-excerpt{overflow: hidden;}
-.blog-title{font-size: 26px;padding-left: 20px;padding-top: 20px;position: relative;}
-.blog-meta{padding-left: 20px;}
+.blog-title{font-size: 26px;/* padding-left: 20px; *//* padding-top: 20px; */position: relative;}
+.blog-meta{/* padding-left: 20px; */}
 .read-more{
     display: inline-block;
     text-align: center;
@@ -338,7 +338,7 @@ button{
     transition: all 0.2s ease;
     background: #1F7A65;
 }
-.blog-article{padding-left: 20px;text-indent: 20px;}
+.blog-article{/* padding-left: 20px; */text-indent: 20px;}
 .newer-posts {
     left: 0;
 }

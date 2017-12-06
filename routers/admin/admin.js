@@ -267,22 +267,27 @@ router.post('/content/add',function(req,res,next){
         info: info
     });
     /*编辑-保存入口*/
-    var _id = req.body.id || '';//如果参数传递博客id,则为编辑的保存
+    var _id = req.body.id || '';//如果存在参数传递博客id,则为编辑的保存
     if(_id){
-        CategoryBase.update({_id:_id},{
+        contentBase.update({_id:_id},{
             title: title,
             type: type,
             mark: mark,
             content: content,
             author: req.userInfo.username
         }).then(function(content){
+
             if(content){
                 responseData.code = 1;
-                responseData.message = '新增博客成功';
+                responseData.message = '修改博客成功';
                 res.json({
                     serInfo: req.userInfo,
                     responseData: responseData
                 });
+                console.log({
+                    serInfo: req.userInfo,
+                    responseData: responseData
+                })
             }
         });
         return;
