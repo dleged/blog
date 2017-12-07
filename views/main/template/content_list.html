@@ -9,7 +9,7 @@
             <time class="post-date" datetime="2017-10-26">{{ item.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</time>
         </div>
         <section class="blog-excerpt">
-            <p class="blog-article"> {% autoescape %}{{ item.info }}{% endautoescape %} </p>
+            <p class="blog-article"> {% autoescape %}{{ item.info }}{% endautoescape %} ... ...</p>
             <p><a class="read-more" href="./list?_id={{ item.id }}">查看全文</a></p>
         </section>
     </article>
