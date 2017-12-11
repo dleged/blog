@@ -1,6 +1,6 @@
-const path = require('paht');
+const path = require('path');
 
-modules.exports = {
+module.exports = {
     entry: 'app.js',
     output: {
         path: path.resolve(__dirname,'dist'),//生产环境
