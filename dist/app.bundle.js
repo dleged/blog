@@ -82,7 +82,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname,'dist'),//生产环境
         filename: 'app.bundle.js'
-    }
+    },
+    module: {
+	    rules: [
+	      	{ test: /\.txt$/, use: 'raw-loader' }
+	    ]
+	}
 }
 /* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
