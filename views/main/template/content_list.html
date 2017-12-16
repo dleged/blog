@@ -1,4 +1,9 @@
 <section class="content-list content">
+    {% if responseData.data.length == 0 %}
+        <h3 class="blog-tips">还没有博客，开始你的第一个
+            <a href="/admin">博客吧！</a>
+        </h3>
+    {% endif %}
     {% for item in responseData.data %}
     <!--博客列表-->
     <article class="blog-piece">

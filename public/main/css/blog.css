@@ -286,6 +286,10 @@ button{
     position: relative;
     width: 1100px;
 }
+.blog-tips{
+    text-align: center;
+    padding-top: 30px;
+}
 .blog-piece{
     width: 880px;
     padding: 25px;
