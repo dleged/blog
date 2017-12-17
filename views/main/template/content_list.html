@@ -20,15 +20,17 @@
     </article>
     {% endfor %}
     <!--上下页-->
-    <nav class="pagination" role="navigation">
-        {% if responseData.page!= 1  %}
-        <a class="newer-posts" href="./index?page={{ responseData.page-1 }}">
-            <span aria-hidden="true">←</span> PREV </a>
-        {% endif %}
-        <span class="page-number">Page {{ responseData.page }} of {{ responseData.pages }}</span>
-        {% if responseData.page!= responseData.pages  %}
-        <a class="older-posts" href="./index?page={{ responseData.page+1 }}">
-            NEXT <span aria-hidden="true">→</span></a>
-        {% endif %}
-    </nav>
+    {% if responseData.data.length %}
+        <nav class="pagination" role="navigation">
+            {% if responseData.page!= 1  %}
+            <a class="newer-posts" href="./index?page={{ responseData.page-1 }}">
+                <span aria-hidden="true">←</span> PREV </a>
+            {% endif %}
+            <span class="page-number">Page {{ responseData.page }} of {{ responseData.pages }}</span>
+            {% if responseData.page!= responseData.pages  %}
+            <a class="older-posts" href="./index?page={{ responseData.page+1 }}">
+                NEXT <span aria-hidden="true">→</span></a>
+            {% endif %}
+        </nav>
+    {% endif %}
 </section>
