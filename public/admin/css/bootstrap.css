@@ -6684,4 +6684,7 @@ button.close {
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
 }
+.tip-text{
+    margin-top: 15px;
+}
 /*# sourceMappingURL=bootstrap.css.map */
