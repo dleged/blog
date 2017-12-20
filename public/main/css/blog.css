@@ -74,11 +74,11 @@ button{
     background-color: #9fc;
     background-image: -webkit-linear-gradient(right,#9cf 0%,#f9c 25%,#fc9 50%,#9fc 75%,#9cf 100%);
     background-image: -moz-linear-gradient(right,#9cf 0%,#f9c 25%,#fc9 50%,#9fc 75%,#9cf 100%);
-    background-image: linear-gradient(to right,#9cf 0%,#f9c 25%,#fc9 50%,#9fc 75%,#9cf 100%);
+    background-image: linear-gradient(to right,#1c43a7 0%,#3b3aad 25%,#2a2a9e 50%,#34825b 75%,#23239e 100%);
     background-size: 400% 100%;
     -webkit-animation: header-anim 80s infinite linear;
     -moz-animation: header-anim 80s infinite linear;
-    animation: header-anim 80s infinite linear;
+    animation: header-anim 40s infinite linear;
     position: absolute;
     display: block;
     left: 0;
@@ -148,6 +148,12 @@ button{
     height: 40px;
     background: url(/public/main/images/layout.png) 50% 50% no-repeat;
     cursor: pointer;
+}
+.headerV-center{
+    color: white;
+    margin-top: 80px;
+    text-align: center;
+    font-size: 30px;
 }
 .router-link-active{
     color: white;
