@@ -3,7 +3,7 @@ div,p,section,h1,h2,h3,h4,h5,h6,span,article,textarea,input,select{box-sizing: b
 body {
     line-height: 1.5;
     font-family: 'Microsoft Yahei';
-    background: #d3d3d3;
+    background: #f7f8fa;
     /* overflow: hidden; */
     padding: 0;
     margin: 0;
@@ -64,8 +64,6 @@ button{
 /*顶部导航*/
 .headerV{
     padding: 0 20px;
-    position: relative;
-    height: 60px;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,.04);
     width: 100%;
@@ -73,6 +71,46 @@ button{
     float: left;
     overflow: hidden;
     box-sizing: border-box;
+    background-color: #9fc;
+    background-image: -webkit-linear-gradient(right,#9cf 0%,#f9c 25%,#fc9 50%,#9fc 75%,#9cf 100%);
+    background-image: -moz-linear-gradient(right,#9cf 0%,#f9c 25%,#fc9 50%,#9fc 75%,#9cf 100%);
+    background-image: linear-gradient(to right,#9cf 0%,#f9c 25%,#fc9 50%,#9fc 75%,#9cf 100%);
+    background-size: 400% 100%;
+    -webkit-animation: header-anim 80s infinite linear;
+    -moz-animation: header-anim 80s infinite linear;
+    animation: header-anim 80s infinite linear;
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 250px;
+    margin: 0;
+}
+.surface {
+    top:40px;
+    position: absolute;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+}
+@-webkit-keyframes header-anim {
+    to {
+        background-position: 400% 0;
+    }
+}
+
+@-moz-keyframes header-anim {
+    to {
+        background-position: 400% 0;
+    }
+}
+
+@keyframes header-anim {
+    to {
+        background-position: 400% 0;
+    }
 }
 .headerv-nav{
     float: left;
@@ -81,20 +119,20 @@ button{
     float: left;
     display: inline-block;
     padding: 0 12px;
-    height: 60px;
-    color: #999;
+    height: 50px;
+    color: white;
     font-size: 14px;
     line-height: 60px;
 }
 .headerV .headerv-nav a:hover, .headerV .headerv-nav a.router-link-active {
-    border-bottom: 4px solid #6ed56c;
+    border-bottom: 4px solid #1f7a65;
 }
 .headerV .headerv-user {
     float: right;
     margin-top: 5px;
 }
 .headerv-user .headerv-login {
-    color: #6ed56c;
+    color: white;
     font-size: 16px;
     line-height: 50px;
 }
@@ -105,14 +143,14 @@ button{
 }
 .headerV .headerv-logout {
     float: right;
-    margin: 5px 0 0 20px;
+    margin: 5px 0 0 0px;
     width: 40px;
     height: 40px;
-    background: url(/public/main/images/lagout.png) 50% 50% no-repeat;
+    background: url(/public/main/images/layout.png) 50% 50% no-repeat;
     cursor: pointer;
 }
 .router-link-active{
-    color: #6ab979;
+    color: white;
     line-height: 53px;
     font-size: 13px;
 }
@@ -211,7 +249,7 @@ button{
     height: 35px;
     line-height: 36px;
     border-radius: 4px;
-    background: #6ed56c;
+    background: #1a6151;
     color: #fff;
     font-size: 15px;
     text-align: center;
@@ -241,7 +279,7 @@ button{
     color: #999;
 }
 .forget-reg a.reg {
-    color: #6ed56c;
+    color: #1b6050;
     border-left: 1px solid #e8e8e8;
     padding-left: 10px;
 }
@@ -278,6 +316,7 @@ button{
 .blog-main{
     position: relative;
     clear: both;
+    margin-top: 220px;
 }
 .blog-content{
     margin: 0 auto;
@@ -293,7 +332,7 @@ button{
     padding-top: 30px;
 }
 .blog-piece{
-    width: 880px;
+    /* width: 880px; */
     padding: 25px 25px 0 25px;
     /* margin-bottom: 20px; */
     background: white;
@@ -323,16 +362,17 @@ button{
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
-    padding: 10px;
-    font-size: 12px;
+    padding: 4px;
+    font-size: 14px;
     line-height: 1.5;
-    color: #ffffff;
-    background-color: #164;
+    color: #1f7a65;
+    /* background-color: #164; */
     float: right;
     right: 20px;
     position: relative;
     bottom: 10px;
     margin-top: 10px;
+    border-bottom: 1px solid #164;
 }
 @media only screen and (max-width: 960px){
     .blog-content{
@@ -375,14 +415,75 @@ button{
     background: white;
 }
 .content-list{
-    width: 950px;
+    width: 880px;
     float: left;
 }
 .content-secondly{
-    width: 100px;
+    width: 200px;
     float: right;
 }
 .blog-meta{
     color: #969696;
 }
-
+/*右侧信息栏*/
+.content-secondly .info-basic{
+    padding: 50px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+.content-secondly .bg-cover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    background-position: 50%;
+    opacity: .4;
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    background: url('../images/bg-cover.png');
+}
+.content-secondly .conbox{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.25);
+}
+.conbox .mem-banner{
+    display: inline-block;
+    border-radius: 100%;
+    background-color: hsla(0,0%,100%,.25);
+    padding: 10px;
+    height: 120px;
+    width: 120px;
+}
+.mem-banner img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: hsla(0,0%,100%,.39);
+}
