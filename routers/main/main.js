@@ -47,7 +47,6 @@ router.get('/index',function(req,res,next){
 router.get('/list',function(req,res,next){
     var id = req.query._id;
     ContentBase.findOne({_id: id}).then(function(content){
-        console.log(content);
         if(content){
             res.render('main/article_details',{
                 userInfo: req.userInfo,
