@@ -104,7 +104,8 @@ window.onerror = function(message, file, line) {
     function resize() {
         var body = document.body
           , html = document.documentElement
-          , width = Math.min(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth)
+          ,//width = Math.min(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth)
+            width = Number(document.querySelector('.headerV').offsetWidth)
           , height = 300
           , backingStore = context.backingStorePixelRatio || context.webkitBackingStorePixelRatio || context.mozBackingStorePixelRatio || 1;
         scale = (window.devicePixelRatio || 1) / backingStore;

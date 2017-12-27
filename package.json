@@ -4,7 +4,9 @@
   "description": "个人博客网站",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js",
+    "dev": "supervisor dev-server.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,5 +22,8 @@
     "supervisor": "^0.12.0",
     "swig": "^1.4.2",
     "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "echo": "^0.1.9"
   }
 }

@@ -71,7 +71,7 @@ app.use(function(req,res,next){
  * 用户发送http - url - 解析路由 - 找到匹配规则 -
  * 指定绑定函数，返回对象内容至用户
  * */
-app.use('/',require('./routers/main/main'));
+app.use('/',require('./routers/main/main'));//页面跳转
 app.use('/api',require('./routers/admin/api'));//后台接口路由
 app.use('/admin',require('./routers/admin/admin'));
 
@@ -81,6 +81,6 @@ mongoose.connect(DB_NAME,function(err){
     }else{
         console.info('**********连接mongoose数据成功**********');
         app.listen(port);
-        console.info('**********服务器启动成功端口' + port + '**********');
+        console.info('**********服务器启动成功端口：' + port + '**********');
     }
 });

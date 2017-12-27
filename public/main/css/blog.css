@@ -53,6 +53,7 @@ button{
 }
 .main-bolg{
     /* overflow: scroll; */
+    min-width: 1100px;
 }
 .headerV::after{
     content: '';
@@ -67,7 +68,7 @@ button{
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,.04);
     width: 100%;
-    min-width: 1000px;
+    min-width: 1100px;
     float: left;
     overflow: hidden;
     box-sizing: border-box;
@@ -331,6 +332,7 @@ button{
     position: relative;
     width: 1100px;
     overflow: hidden;
+    margin-bottom: 40px;
 }
 .blog-tips{
     text-align: center;
@@ -338,7 +340,7 @@ button{
 }
 .blog-piece{
     /* width: 880px; */
-    padding: 25px 25px 0 25px;
+    padding: 25px 40px 0 40px;
     /* margin-top: 60px; */
     background: white;
 }
@@ -352,31 +354,33 @@ button{
     color: #141412;
 }
 .blog-meta a {
-    color: #1F7A65;
     transition: color 0.3s ease;
     text-decoration: none;
     text-decoration: none;
+    color: #969696;
 }
 .blog-excerpt{overflow: hidden;}
 .blog-title{position: relative;font-size: 18px;margin-bottom: 0px;}
-.blog-meta{text-indent: 20px;}
-.read-more{
+.blog-meta{text-indent: 0px;}
+.mark-tag{
+    padding: 10px 0;
     display: inline-block;
+}
+.mark-tag:before{
+    content: "标签：";
+    position: relative;
+    color: #1F7A65;
+}
+.read-more{
+    padding: 0 5px;
     text-align: center;
     vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
-    padding: 4px;
     font-size: 14px;
     line-height: 1.5;
     color: #1f7a65;
-    /* background-color: #164; */
-    float: right;
-    right: 20px;
-    position: relative;
-    bottom: 10px;
-    margin-top: 10px;
     border-bottom: 1px solid #164;
 }
 @media only screen and (max-width: 960px){
@@ -389,7 +393,7 @@ button{
     transition: all 0.2s ease;
     background: #1F7A65;
 }
-.blog-article{/* padding-left: 20px; */text-indent: 20px;}
+.blog-article{margin: 0px;text-indent: 20px;color: #969696;}
 .newer-posts {
     left: 0;
 }
@@ -400,6 +404,12 @@ button{
     text-decoration: none;
     transition: border 0.3s ease;
 }
+.older-posts{
+    cursor: e-resize;
+}
+.newer-posts{
+    cursor: w-resize;
+} 
 .pagination {
     position: relative;
     width: 880px;
@@ -414,7 +424,7 @@ button{
     display: inline-block;
     padding: 10px 0;
     min-width: 189px;
-    margin: 0 40px;
+    margin: 0 20px;
 }
 .blog-content .content{
     background: white;
@@ -429,6 +439,10 @@ button{
 }
 .blog-meta{
     color: #969696;
+}
+.post-date{
+    color: #969696;
+    float: right;
 }
 /*右侧信息栏*/
 .content-secondly .info-basic{
@@ -491,4 +505,25 @@ button{
     margin-bottom: 10px;
     padding: 10px;
     background: hsla(0,0%,100%,.39);
+}
+.info-link-box .info-link{
+    line-height: 40px;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #f8f8fa;
+}
+.info-link-box:last-child{border: none;}
+.info-link .v-icon{
+    text-align: left;
+    top: 4px;
+    position: relative;
+}
+.info-link .desc{
+    float: right;
+    text-align: right;
+    color: #9e9e9e;
+    font-size: 14px;
 }

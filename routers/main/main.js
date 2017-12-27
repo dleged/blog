@@ -10,7 +10,7 @@ var ContentBase = require('../../models/content');
  * */
 router.get('/index',function(req,res,next){
     /*从博客列表中读取列表*/
-    var limit = 2; //读取的条数
+    var limit = 5; //读取的条数
     var page = Number(req.query.page || 1);//当前页数
     var skip = 0; //（当前页-1）*limit 跳过的条数;
     var pages = 0;//总条数

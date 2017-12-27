@@ -7,15 +7,22 @@
     {% for item in responseData.data %}
     <!--博客列表-->
     <article class="blog-piece">
-        <h2 class="blog-title"><a href="./index/list_id={{ item.id }}">{{ item.title }}</a></h2>
+        <h2 class="blog-title"><a href="./list?_id={{ item.id }}">{{ item.title }}</a></h2>
         <div class="blog-meta">
-            <a href="#">{{item.author}}</a>
-            on ,
-            <time class="post-date" datetime="2017-10-26">{{ item.createTime|date('Y-m-d H:i:s', -480, 'CCT') }}</time>
+            <div class="mark-tag">
+                {% for mark in item.mark.split(',') %}
+                    <a href="/tag/{{mark}}">{{mark}}</a>
+                {% endfor %}
+            </div>
+            <!-- <a href="#">{{item.author}}</a>
+            on , -->
+            <time class="post-date" datetime="2017-10-26">{{ item.createTime|date('Y-m-d', -480, 'CCT') }}
+            </time>
         </div>
         <section class="blog-excerpt">
-            <p class="blog-article"> {% autoescape %}{{ item.info }}{% endautoescape %} ... ...</p>
-            <p><a class="read-more" href="./list?_id={{ item.id }}">READ ...</a></p>
+            <p class="blog-article"> {% autoescape %}{{ item.info }}{% endautoescape %} ... 
+                <a class="read-more" href="./list?_id={{ item.id }}">MORE</a>
+            </p>
         </section>
     </article>
     {% endfor %}
