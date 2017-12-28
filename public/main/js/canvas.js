@@ -69,7 +69,7 @@ window.onerror = function(message, file, line) {
         }
         var p = points[totalPoints - 1], cx, cy;
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = '#fafafa';
+        context.fillStyle = '#fafafa';  
         context.beginPath();
         context.moveTo(p.x * canvas.width, p.y * canvas.height);
         motion = 0;
@@ -104,8 +104,7 @@ window.onerror = function(message, file, line) {
     function resize() {
         var body = document.body
           , html = document.documentElement
-          ,//width = Math.min(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth)
-            width = Number(document.querySelector('.headerV').offsetWidth)
+          , width = Math.min(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth)
           , height = 300
           , backingStore = context.backingStorePixelRatio || context.webkitBackingStorePixelRatio || context.mozBackingStorePixelRatio || 1;
         scale = (window.devicePixelRatio || 1) / backingStore;

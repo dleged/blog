@@ -443,6 +443,8 @@ button{
 .post-date{
     color: #969696;
     float: right;
+    font-size: 12px;
+    line-height: 42px;
 }
 /*右侧信息栏*/
 .content-secondly .info-basic{
