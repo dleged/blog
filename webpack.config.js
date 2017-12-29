@@ -30,7 +30,15 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
 	//entry: './public/js/app.js',//JavaScript入口的执行文件
 	// 如果有多个入口
-    entry: ['./public/js/serch.js','./src/index.js'],
+    //entry: ['./public/js/serch.js','./src/index.js'],
+    entry: {
+        index: ['./public/main/js/jquery.min.js',
+                './public/main/js/index.js',
+                './public/main/js/pShine-validator.js',
+                './public/main/js/modalV.js',
+                './public/main/js/canvas.js'
+        ]
+    },
     // 入口以对象的话，称为chunks，
     // 对象行形式 filename不能是一个了
     //entry:{
@@ -46,10 +54,10 @@ module.exports = {
     // 配置出口（打包的输出路径）
 	output: {
 		publicPath: '/',
-		filename: 'bundle.js',// 把所有依赖的模块合并输出到一个 bundle.js 文件
+		filename: '[name].bundle.js',//把所有依赖的模块合并输出到一个 bundle.js 文件
 		//filename:'bundle.js',
         //filename:'app_[hash].js'
-		path: path.resolve(__dirname,'./assets/build')//输出文件目录
+		path: path.resolve(__dirname,'./public/dist')//输出文件目录
 	},
 	devtool: 'eval-source-map',
 	// 配置服务器

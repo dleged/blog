@@ -49,6 +49,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const staticDir = path.posix.join(config.assetsPublicPath,config.assetsSubDirectory);
 app.use(staticDir,express.static(__dirname + '/public'));
 
+
 /*设置cookies*/
 app.use(function(req,res,next){
     req.cookies = new Cookies(req,res);

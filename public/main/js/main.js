@@ -1,7 +1,6 @@
-;(function () {
-	
-	'use strict';
 
+;(function () {	
+	'use strict';
 	var isMobile = {
 		Android: function() {
 			return navigator.userAgent.match(/Android/i);
@@ -24,19 +23,13 @@
 	};
 
 
-
-
 	var contentWayPoint = function() {
 		var i = 0;
 		$('.animate-box').waypoint( function( direction ) {
-
 			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
-				
 				i++;
-
 				$(this.element).addClass('item-animate');
 				setTimeout(function(){
-
 					$('body .animate-box.item-animate').each(function(k){
 						var el = $(this);
 						setTimeout( function () {
@@ -50,13 +43,10 @@
 							} else {
 								el.addClass('fadeInUp animated-fast');
 							}
-
 							el.removeClass('item-animate');
 						},  k * 50, 'easeInOutExpo' );
-					});
-					
-				}, 100);
-				
+					});		
+				}, 100);	
 			}
 
 		} , { offset: '85%' } );
@@ -79,7 +69,6 @@
 		});
 
 		$(window).scroll(function(){
-
 			var $win = $(window);
 			if ($win.scrollTop() > 200) {
 				$('.js-top').addClass('active');
@@ -94,8 +83,6 @@
 	var loaderPage = function() {
 		$(".fh5co-loader").fadeOut("slow");
 	};
-
-	
 	var parallax = function() {
 
 		if ( !isMobile.any() ) {
@@ -111,7 +98,6 @@
 
 	$(function(){
 		contentWayPoint();
-		
 		goToTop();
 		loaderPage();
 		parallax();
