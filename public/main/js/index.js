@@ -143,7 +143,8 @@
         },
         loginSuccess: function(){
             var userBox = $(loginAndResFns.dataDom.headervUser);
-            location.reload();//登陆成功后，刷新页面，session控制登陆
+            location.reload();
+            //登陆成功后，刷新页面，session控制登陆
             /*userBox.html('<a href=""' + ' class="router-link-active">' + name + '</a>'
                         +'<a href="/api/user/logout" class="headerv-logout"></a>');*/
         },
@@ -164,6 +165,7 @@
             }
         }
     }
+    
     function toggleLoginAndRes(){
         loginAndResFns.toggleFn();
     }
@@ -178,7 +180,6 @@
     }
 
     var registerEvent =  BLOG.register.event;
-
     _.eventsMap.forEach(function(item){
         registerEvent(item.stackClass,item.type,item.onFn);
     });
