@@ -38,7 +38,7 @@
             onFn: logout
         }
     ]
-
+    alert(1);
     /*注册句柄事件*/
     function showLogin(){
         var temp = getTemplate('logAndReg');//获取登陆和注册字符串模板
@@ -165,7 +165,7 @@
             }
         }
     }
-    
+
     function toggleLoginAndRes(){
         loginAndResFns.toggleFn();
     }
