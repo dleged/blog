@@ -8,7 +8,7 @@ var ContentBase = require('../../models/content');
 /*
  * 博客首页
  * */
-router.get('/index',function(req,res,next){
+router.get('/',function(req,res,next){
     /*从博客列表中读取列表*/
     var limit = 5; //读取的条数
     var page = Number(req.query.page || 1);//当前页数
@@ -40,6 +40,7 @@ router.get('/index',function(req,res,next){
         });
     })
 })
+
 
 /*
 * 博客详情

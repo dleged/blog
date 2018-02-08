@@ -1,15 +1,14 @@
 /**
  * Created by $ on 2017/11/29.
  */
-/**
- * Created by $ on 2017/11/1.
- * 应用启动文件的入口文件
- */
 
+
+// usr/local/mongodb/bin/mongod --dbpath=/Users/fanduanduan/Desktop/FRONT-END/node/blog/db
 /*
 * TODO：require('server.conf').dev开发环境配置
 *       require('server.conf').build部署环境设置
 * */
+process.env.PORT = 9999;
 const config = require('./build/server.conf.js').dev;
 const port = config.port;
 const express = require('express');
@@ -19,6 +18,7 @@ const bodyParser = require('body-parser');
 const Cookies = require('cookies');
 const path = require('path');
 const cp = require('child_process');
+const opn = require('opn');
 const User = require('./models/user');
 //const DB_NAME = 'mongodb://47.96.167.149:27017/usr/local/mongodb/db/blogDB';//连接远mongodb
 const DB_NAME = 'mongodb://localhost:27017/db';
@@ -43,6 +43,7 @@ swig.setDefaults({
 
 /*bodyParse设置*/
 app.use(bodyParser.urlencoded({extended: true}));
+
 /*
  * 设置静态文件托管
  * */
@@ -75,13 +76,13 @@ app.use(function(req,res,next){
 app.use('/',require('./routers/main/main'));//页面跳转
 app.use('/api',require('./routers/admin/api'));//后台接口路由
 app.use('/admin',require('./routers/admin/admin'));
-
 mongoose.connect(DB_NAME,function(err){
     if(err){
         console.info('**********连接mongoose数据失败**********');
     }else{
-        console.info('**********连接mongoose数据成功**********');
+        console.info(`  连接mongoose数据成功`);
         app.listen(port);
-        console.info('**********服务器启动成功端口：' + port + '**********');
+        console.info(`  local http://localhost:${port}`)
+        // opn('localhost:' + port + '/');
     }
 });
