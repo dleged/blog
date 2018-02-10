@@ -1,2 +1,3 @@
 # blog
-node express swig mongodb 构建个人博客
+node exprss swig mongodb 构建个人博客
+Git tracks changes of files.
