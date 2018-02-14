@@ -1,4 +1,7 @@
 # blog
 node exprss swig mongodb 构建个人博客
 Git tracks changes of files.
-READEME editor in master dev 
+this is add in branch master
+
+fix bug by 101
+
