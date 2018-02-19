@@ -63,6 +63,7 @@ app.use(function(req,res,next){
             req.userInfo.isAdmin = Boolean(user.isAdmin);
         })
     }catch(e) {
+        console.log('角色分配出现错误！');
     }
     next();
 });
