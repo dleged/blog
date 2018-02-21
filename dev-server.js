@@ -84,6 +84,6 @@ mongoose.connect(DB_NAME,function(err){
         console.info(`  连接mongoose数据成功`);
         app.listen(port);
         console.info(`  local http://localhost:${port}`)
-        // opn('localhost:' + port + '/');
+        opn('localhost:' + port + '/');
     }
 });
