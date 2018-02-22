@@ -41,7 +41,7 @@ swig.setDefaults({
     tzOffset: false
 })
 
-/*bodyParse设置*/
+/*bodyParse设置,解析url路径*/
 app.use(bodyParser.urlencoded({extended: true}));
 
 /*
