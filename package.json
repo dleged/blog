@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
-    "dev": "supervisor dev-server.js"
+    "dev": "supervisor dev-server.js",
+    "publish-mac": "export NODE_EVN=prod&&webpack -p --progress --colors",
+    "publish-window": "set NODE_EVN=prod&&webpack -p --progress --colors"
   },
   "author": "",
   "license": "ISC",
