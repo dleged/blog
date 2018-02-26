@@ -338,6 +338,9 @@ button{
     text-align: center;
     padding-top: 30px;
 }
+.blog-tips a{
+    color: #1b6050;
+}
 .blog-piece{
     /* width: 880px; */
     padding: 25px 40px 0 40px;
@@ -409,7 +412,7 @@ button{
 }
 .newer-posts{
     cursor: w-resize;
-} 
+}
 .pagination {
     position: relative;
     width: 880px;

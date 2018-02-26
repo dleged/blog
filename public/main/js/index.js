@@ -11,7 +11,6 @@
             $(doc).on(type,ele,fn);
         }
     }
-
     _.eventsMap = [
         {
             info: '注册或者登陆模块',
@@ -38,7 +37,7 @@
             onFn: logout
         }
     ]
-    alert(1);
+
     /*注册句柄事件*/
     function showLogin(){
         var temp = getTemplate('logAndReg');//获取登陆和注册字符串模板
