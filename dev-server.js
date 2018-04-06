@@ -80,7 +80,7 @@ app.use('/api',require('./routers/admin/api'));//后台接口路由
 app.use('/admin',require('./routers/admin/admin'));
 mongoose.connect(DB_NAME,function(err){
     if(err){
-        console.info('**********连接mongoose数据失败**********');
+        console.log('**********连接mongoose数据失败**********');
     }else{
         console.info(`  连接mongoose数据成功`);
         app.listen(port);
