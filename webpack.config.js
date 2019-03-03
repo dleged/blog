@@ -39,18 +39,6 @@ module.exports = {
                 './public/main/js/canvas.js'
         ]
     },
-    // 入口以对象的话，称为chunks，
-    // 对象行形式 filename不能是一个了
-    //entry:{
-    //    app:'./src/js/index.js',
-    //    serch:'./src/js/serch.js'
-    //},
-    //output:{
-    //    path:__dirname+'/build',
-    //    //3.1 如何配置版本号，清除缓存
-    //    //filename:'[name]_[hash].js'
-    //    filename:'[name]_[chunkhash].js'
-    //},
     // 配置出口（打包的输出路径）
 	output: {
 		publicPath: '/',
@@ -183,7 +171,6 @@ module.exports = {
 	// 项目依赖的外部文件，如jQuery
     // 这样配置之后，最后就不会把jquery打包到build.js里，而且
     // var $=require('jquery');这样仍然可以用
-    
     externals:{
        jquery:'window.jQuery'
     }
